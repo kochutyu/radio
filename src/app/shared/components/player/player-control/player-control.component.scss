@@ -1,0 +1,98 @@
+.player {
+  background: none;
+  text-align: center;
+  font-family: FontAwesome;
+  color: #fff;
+  font-size: 26px;
+  line-height: 26px;
+  width: 216px;
+  height: 35px;
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 10;
+  transition: all 0.3s ease-in;
+  border-spacing: 0;
+}
+
+.player td {
+  width: 72px;
+}
+
+.footer {
+  background: none;
+  font-family: FontAwesome;
+  color: #6d6d6d;
+  font-size: 15px;
+  line-height: 15px;
+  height: 45px;
+  width: 360px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 20;
+  transition: all 0.15s linear;
+  transition: bottom 0.3s linear;
+
+  td {
+    position: relative;
+
+    label {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    input {
+      display: none;
+    }
+  }
+
+  &__td-content-align {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.play:hover,
+.love:hover:before,
+.forward:hover:before,
+.backward:hover:before,
+.options:hover:before {
+  color: #bbb;
+  transition: all 0.15s linear;
+}
+
+.play,
+.love:before,
+.forward:before,
+.backward:before,
+.options:before {
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.15s linear;
+}
+
+.backward:before {
+  content: "\f04a";
+}
+
+.forward:before {
+  content: "\f04e";
+}
+
+.options:before {
+  content: "\f141";
+}
+
+.love:before {
+  content: "\f08a";
+}
+
+#love:checked~label.love:before {
+  content: "\f004";
+  color: #ff564c;
+  transition: all 0.15s linear;
+}

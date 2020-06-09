@@ -1,0 +1,26 @@
+<table class="player">
+  <td>
+    <label class="backward" for="backward"></label>
+    <input type="checkbox" id="backward" class="hiden" />
+  </td>
+  <td>
+    <fa-icon [icon]="faPlay" class="play" *ngIf="false; else stop"></fa-icon>
+    <ng-template #stop>
+      <fa-icon [icon]="faStop" class="play"></fa-icon>
+    </ng-template>
+  </td>
+  <td>
+    <input type="checkbox" id="forward" class="hiden" />
+    <label class="forward" for="forward"></label>
+  </td>
+</table>
+<table class="footer">
+  <td>
+    <input type="checkbox" id="love" class="hiden" />
+    <label class="love" for="love"></label>
+  </td>
+  <td>
+    <input type="checkbox" id="options" class="hiden" />
+    <label class="options" for="options"></label>
+  </td>
+</table>
