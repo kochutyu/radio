@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IPlayerRadioGenre, IPlayerRadioHit, IPlayerRadioNowPlaying, IPlayerRadioCountry, IPlayerRadioSearch } from '../interfaces';
+import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RADIO_API } from 'src/environments/set-environments';
@@ -17,80 +18,135 @@ export class RadioService {
 
   constructor(private http: HttpClient) { }
 
-  getRadioSearch(
-    country: string = "ALL",
-    genre: string = "ALL",
-    keyword: string = ""
-  ): Observable<any> {
-    return this.http.get(
-      `https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?country=${country}&keyword=${keyword}&genre=${genre}`,
-      {
+  getRadioSearch(country: string = "ALL", genre: string = "ALL", keyword: string = ""): Observable<any> {
+    return this.http
+      .get(
+        `https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?country=${country}&keyword=${keyword}&genre=${genre}`, {
         headers,
       }
-    );
+      )
+      .pipe(
+        map((data: any) => {
+          return {
+            results: this.converObjectForRadio(data, this.convertToIPlayerRadioSearch)
+          };
+        })
+      );
   }
 
   getCountriesList(): Observable<any> {
-    return this.http.get(
-      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?countries=",
-      {
+    return this.http
+      .get(
+        "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?countries=", {
         headers,
       }
-    );
+      )
+      .pipe(
+        map((data: any) => {
+          return {
+            results: this.converObjectForRadio(data, this.convertToIPlayerRadioCountry)
+          };
+        })
+      );
   }
 
   getNowPlaying(): Observable<any> {
-    return this.http.get(
-      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?nowplaying=1",
-      {
+    return this.http
+      .get(
+        "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?nowplaying=1", {
         headers,
       }
-    );
+      )
+      .pipe(
+        map((data: any) => {
+          return {
+            results: this.converObjectForRadio(data, this.convertToIPlayerRadioNowPlaying)
+          };
+        })
+      );
   }
 
   getRadioStationInfo(id: string | number): Observable<any> {
     return this.http.get(
-      `https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?id=${id}`,
-      {
-        headers,
-      }
-    );
-  }
-
-  getWeeklyCharts(): Observable<any> {
-    return this.http.get(
-      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?chartsweek=1",
-      {
-        headers,
-      }
-    );
-  }
-
-  getMonthlyCharts(): Observable<any> {
-    return this.http.get(
-      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?chartsmonth=1",
-      {
-        headers,
-      }
-    );
+      `https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?id=${id}`, {
+      headers,
+    }
+    )
+      .pipe(
+        map((data: any) => {
+          return {
+            results: this.converObjectForRadio(data, this.convertToIPlayerRadioSearch)
+          };
+        })
+      );
   }
 
   getMusicGenresList(): Observable<any> {
     return this.http.get(
-      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?categories=1",
-      {
-        headers,
-      }
-    );
+      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?categories=1", {
+      headers,
+    }
+    )
+      .pipe(
+        map((data: any) => {
+          return {
+            results: this.converObjectForRadio(data, this.convertToIPlayerRadioGenre)
+          };
+        })
+      );
   }
 
   getDailyCharts(): Observable<any> {
     return this.http.get(
-      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?charts24h=1",
-      {
-        headers,
-      }
-    );
+      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?charts24h=1", {
+      headers,
+    }
+    )
+      .pipe(
+        map((data: any) => {
+          return {
+            results: this.converObjectForRadio(data, this.convertToIPlayerRadioHit)
+          };
+        })
+      );
+  }
+
+  getWeeklyCharts(): Observable<any> {
+    return this.http.get(
+      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?chartsweek=1", {
+      headers,
+    }
+    )
+      .pipe(
+        map((data: any) => {
+          return {
+            results: this.converObjectForRadio(data, this.convertToIPlayerRadioHit)
+          };
+        })
+      );
+  }
+
+  getMonthlyCharts(): Observable<any> {
+    return this.http.get(
+      "https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?chartsmonth=1", {
+      headers,
+    }
+    )
+      .pipe(
+        map((data: any) => {
+          return {
+            results: this.converObjectForRadio(data, this.convertToIPlayerRadioHit)
+          };
+        })
+      );
+  }
+
+  converObjectForRadio(data: any, method: any): any {
+    const allObj: any = data.results;
+    const results: Array<IPlayerRadioNowPlaying> = [];
+    for (const obj of allObj)
+      results.push(method(obj));
+    return results;
   }
 
   convertToIPlayerRadioSearch(item: any): IPlayerRadioSearch {
@@ -135,7 +191,7 @@ export class RadioService {
   convertToIPlayerRadioGenre(item: any): IPlayerRadioGenre {
     return {
       genreID: item.i,
-      genreName: item.c
+      genreName: item.c,
     };
   }
   
