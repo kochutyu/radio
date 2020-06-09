@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PlayerComponent } from './components/player/player.component';
+import { NavbarComponent } from './components/player/navbar/navbar.component';
 
 
 @NgModule({
   declarations: [  
     PlayerComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { PlayerComponent } from './components/player/player.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    PlayerComponent
+    PlayerComponent,
+    NavbarComponent
   ]
 })
 export class SharedModule { }

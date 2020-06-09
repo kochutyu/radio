@@ -1,0 +1,51 @@
+.nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 100;
+
+  &__drop-btn,
+  &__search {
+    position: relative;
+  }
+
+  &__drop-btn {
+    label.main:before {
+      position: absolute;
+      top: 17px;
+      left: 23px;
+      font-family: FontAwesome;
+      content: '\f0c9';
+      color: #959595;
+      font-size: 16px;
+      line-height: 16px;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease-in;
+    }
+
+    label.main:hover:before {
+      color: #bbb;
+    }
+  }
+
+  &__search {
+    .search:before {
+      position: absolute;
+      right: 23px;
+      font-family: FontAwesome;
+      content: '\f002';
+      color: #959595;
+      font-size: 16px;
+      line-height: 16px;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease-in;
+    }
+
+    .search:hover:before {
+      color: #bbb;
+    }
+  }
+}
