@@ -1,4 +1,4 @@
-<table class="player">
+<table class="player" [@player-control]="playerS.animatePlayerGetListRadio">
   <td>
     <label class="backward" for="backward"></label>
     <input type="checkbox" id="backward" class="hiden" />
@@ -14,7 +14,8 @@
     <label class="forward" for="forward"></label>
   </td>
 </table>
-<table class="footer">
+
+<table class="footer" [@player-footer]="playerS.animatePlayerGetListRadio">
   <td>
     <input type="checkbox" id="love" class="hiden" />
     <label class="love" for="love"></label>

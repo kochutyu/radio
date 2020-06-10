@@ -49,3 +49,8 @@
     }
   }
 }
+
+
+#magicButton:checked~label.main:before {
+  color: #ff564c;
+}

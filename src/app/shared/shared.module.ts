@@ -6,7 +6,7 @@ import { PlayerComponent } from './components/player/player.component';
 import { NavbarComponent } from './components/player/navbar/navbar.component';
 import { PlayerControlComponent } from './components/player/player-control/player-control.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [  
@@ -19,15 +19,18 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   exports: [
     FormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
     PlayerComponent,
+    PlayerControlComponent,
     NavbarComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
   ]
 })
 export class SharedModule { }

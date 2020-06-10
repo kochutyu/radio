@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
-<article class="screen">
-    <div class="cover-img">
+<article class="screen" [@menu-ul]="playerS.animatePlayerGetListRadio">
+    <div class="cover-img" [@disk]="playerS.animatePlayerGetListRadio">
         <div class="cover-img__relative">
             <img src="../../../../assets/player/disk.png" alt="">
             <div class="cover-img__relative-dinamic-color">
@@ -11,8 +11,8 @@
     <div class="shadow"></div>
     <div class="bar"></div>
     
-    <div class="info">
-        <h4>STRESSED OUT</h4>
+    <div class="info" [@info]="playerS.animatePlayerGetListRadio">
+        <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">STRESSED OUT</h4>
         <h3>twenty one pilots - Blurryface</h3>
     </div>
     
