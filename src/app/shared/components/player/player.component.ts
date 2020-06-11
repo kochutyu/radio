@@ -17,11 +17,12 @@ export class PlayerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.radioS.getNowPlaying().subscribe(res => {
-      this.radios = res.results;
+    this.radioS.getRadioSearch().subscribe(res => {
+      this.radios = res.results.splice(0, 100);
       console.log(this.radios);
-      
     });
   }
+
+  
 
 }
