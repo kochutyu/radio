@@ -97,6 +97,17 @@ export const animations = [
             ])
         ])
     ]),
+
+    trigger('current', [
+        state('stop', style({
+            bottom: '-100%'
+        })),
+        state('animate', style({
+            bottom: '10px'
+        })),
+        transition('* <=> *', animate('500ms ease-in'))
+    ]),
+
     trigger('current', [
         state('stop', style({
             bottom: '-100%'

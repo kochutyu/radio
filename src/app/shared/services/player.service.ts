@@ -10,7 +10,5 @@ export class PlayerService {
 
   animatePlayer(): void {
     this.animatePlayerGetListRadio = this.animatePlayerGetListRadio === 'stop' ? 'animate' : 'stop';
-    console.log(this.animatePlayerGetListRadio);
-    
   }
 }
