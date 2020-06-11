@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { animations } from './player.animation';
 import { PlayerService } from '../../services/player.service';
 import { RadioService } from '../../services/radio.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-player',
@@ -9,20 +10,33 @@ import { RadioService } from '../../services/radio.service';
   styleUrls: ['./player.component.scss'],
   animations: animations
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent implements OnInit, OnDestroy {
   radios: any = [];
+  $radios: Subscription;
+  @ViewChild('audio', { static: true }) audio: ElementRef;
   constructor(
     public playerS: PlayerService,
     private radioS: RadioService
   ) { }
 
   ngOnInit(): void {
-    this.radioS.getRadioSearch().subscribe(res => {
-      this.radios = res.results.splice(0, 100);
-      console.log(this.radios);
-    });
   }
 
-  
+  ngOnDestroy(): void {
+    this.$radios.unsubscribe();
+  }
+
+  getRadios(): void {
+    this.$radios = this.radioS.getRadioSearch().subscribe(res => {
+      this.playerS.radios = res.results.splice(0, 100);
+      this.playerS.$radios = this.$radios;
+    }, err => console.log(err), () => console.log('unsubscribe'));
+  }
+
+  initRadio(): void{
+    this.playerS.audio = this.audio;
+
+    this.getRadios();
+  }
 
 }

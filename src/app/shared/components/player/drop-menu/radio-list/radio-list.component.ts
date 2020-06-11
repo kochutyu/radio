@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
   selector: 'app-radio-list',
@@ -8,7 +9,9 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 export class RadioListComponent implements OnInit {
   @Input() radios: any = [];
 
-  constructor() { }
+  constructor(
+    public playerS: PlayerService
+  ) { }
   
   ngOnInit(): void {
   }

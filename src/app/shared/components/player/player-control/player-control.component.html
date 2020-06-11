@@ -1,16 +1,16 @@
 <table class="player" [@player-control]="playerS.animatePlayerGetListRadio">
   <td>
-    <label class="backward" for="backward"></label>
+    <label class="backward" for="backward" (click)="playerS.backwardRadio()"></label>
     <input type="checkbox" id="backward" class="hiden" />
   </td>
   <td>
-    <fa-icon [icon]="faPlay" class="play" *ngIf="false; else stop"></fa-icon>
+    <fa-icon [icon]="faPlay" class="play" *ngIf="!playerS.play; else stop" (click)="playerS.playOrStop()"></fa-icon>
     <ng-template #stop>
-      <fa-icon [icon]="faStop" class="play"></fa-icon>
+      <fa-icon [icon]="faStop" class="play" (click)="playerS.playOrStop()"></fa-icon>
     </ng-template>
   </td>
   <td>
     <input type="checkbox" id="forward" class="hiden" />
-    <label class="forward" for="forward"></label>
+    <label class="forward" for="forward" (click)="playerS.forwardRadio()"></label>
   </td>
 </table>

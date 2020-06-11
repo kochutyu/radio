@@ -1,5 +1,6 @@
 <app-navbar></app-navbar>
 <article class="screen" [@menu-ul]="playerS.animatePlayerGetListRadio">
+
   <div class="cover-img" [@disk]="playerS.animatePlayerGetListRadio">
     <div class="cover-img__relative">
       <img src="assets/player/disk.png" alt="">
@@ -8,20 +9,20 @@
       </div>
     </div>
   </div>
-  <div class="bar"></div>
 
-  <app-drop-menu [radios]="radios"></app-drop-menu>
+  <app-drop-menu [radios]="playerS.radios"></app-drop-menu>
 
   <div class="info" [@info]="playerS.animatePlayerGetListRadio">
     <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">STRESSED OUT</h4>
     <h3>twenty one pilots - Blurryface</h3>
   </div>
 
-  <audio preload="auto" id="audio" controls></audio>
+  <audio [src]="playerS.radio" preload="auto" id="audio" controls #audio *ngIf="playerS.radio"></audio>
   <app-player-control></app-player-control>
 
   <div class="current" [@current]="playerS.animatePlayerGetListRadio">
     <h2>Radio By KochuTok</h2>
   </div>
+
   <app-player-control></app-player-control>
 </article>
