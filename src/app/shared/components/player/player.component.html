@@ -1,26 +1,47 @@
 <app-navbar></app-navbar>
 <article class="screen" [@menu-ul]="playerS.animatePlayerGetListRadio">
-    <div class="cover-img" [@disk]="playerS.animatePlayerGetListRadio">
-        <div class="cover-img__relative">
-            <img src="../../../../assets/player/disk.png" alt="">
-            <div class="cover-img__relative-dinamic-color">
-                <div class="cover-img__relative-center-static"></div>
-            </div>
-        </div>
+  <div class="cover-img" [@disk]="playerS.animatePlayerGetListRadio">
+    <div class="cover-img__relative">
+      <img src="../../../../assets/player/disk.png" alt="">
+      <div class="cover-img__relative-dinamic-color">
+        <div class="cover-img__relative-center-static"></div>
+      </div>
     </div>
+  </div>
+  <div class="bar"></div>
+
+  <div class="list" [@list]="playerS.animatePlayerGetListRadio">
+    <table class="list-song" *ngIf="radios.length>0">
+      <tr class="song-info" [ngStyle]="{'height': '50px'}">
+        <th>#</th>
+        <th>Radio Statio</th>
+        <th>Music</th>
+      </tr>
+      <tr class="song" *ngFor="let radio of radios; let idx = index" [ngStyle]="{'height': '50px'}">
+        <td class="idx">
+          {{idx + 1}}
+        </td>
+        <td class="radio">
+          {{radio.radioName}}
+        </td>
+        <td class="music">
+          {{radio.songName}}
+        </td>
+      </tr>
+    </table>
     <div class="shadow"></div>
-    <div class="bar"></div>
-    
-    <div class="info" [@info]="playerS.animatePlayerGetListRadio">
-        <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">STRESSED OUT</h4>
-        <h3>twenty one pilots - Blurryface</h3>
-    </div>
-    
-    <audio preload="auto" id="audio" controls></audio>
-    <app-player-control></app-player-control>
-    
-    <div class="current">
-        <h2>Radio By KochuTok</h2>
-    </div>
-    <app-player-control></app-player-control>
+  </div>
+
+  <div class="info" [@info]="playerS.animatePlayerGetListRadio">
+    <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">STRESSED OUT</h4>
+    <h3>twenty one pilots - Blurryface</h3>
+  </div>
+
+  <audio preload="auto" id="audio" controls></audio>
+  <app-player-control></app-player-control>
+
+  <div class="current" [@current]="playerS.animatePlayerGetListRadio">
+    <h2>Radio By KochuTok</h2>
+  </div>
+  <app-player-control></app-player-control>
 </article>

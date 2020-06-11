@@ -13,7 +13,8 @@ export const animations = [
                 query('@disk', animateChild()),
                 query('@info', animateChild()),
                 query('@player-control', animateChild()),
-                query('@player-footer', animateChild()),
+                query('@list', animateChild()),
+                query('@current', animateChild()),
                 animate('500ms ease-in'),
             ]),
         ])
@@ -76,13 +77,33 @@ export const animations = [
         transition('* <=> *', animate('500ms ease-in'))
     ]),
 
-    trigger('player-footer', [
+
+    trigger('list', [
         state('stop', style({
-            opacity: '1'
+            height: '0px',
+            opacity: '0',
+            position: 'absolute',
+            bottom: '-100%'
         })),
         state('animate', style({
-            opacity: '0'
+            height: '100%',
+            opacity: '1',
+            position: 'absolute',
+            bottom: '0'
         })),
-        transition('* <=> *', animate('100ms ease-in'))
+        transition('* <=> *', [
+            group([
+                animate('500ms ease-in'),
+            ])
+        ])
+    ]),
+    trigger('current', [
+        state('stop', style({
+            bottom: '-100%'
+        })),
+        state('animate', style({
+            bottom: '10px'
+        })),
+        transition('* <=> *', animate('500ms ease-in'))
     ]),
 ];

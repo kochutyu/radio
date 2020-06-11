@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [  
     PlayerComponent,
     NavbarComponent,
-    PlayerControlComponent
+    PlayerControlComponent,
   ],
   imports: [
     CommonModule,
@@ -27,10 +27,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     PlayerComponent,
     PlayerControlComponent,
     NavbarComponent,
-    FontAwesomeModule,
   ]
 })
 export class SharedModule { }
