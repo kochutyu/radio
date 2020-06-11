@@ -10,54 +10,7 @@
   </div>
   <div class="bar"></div>
 
-  <div class="list" [@list]="playerS.animatePlayerGetListRadio">
-    <div *ngIf="radios.length>0">
-      <table class="list-song filter" id="filter">
-        <tr class="song-info" [ngStyle]="{'height': '50px'}">
-          <th>Country</th>
-          <th>Genre</th>
-          <th>Theme</th>
-        </tr>
-        <tr class="song">
-          <td>
-            <select name="select" class="select">
-              <option value="value1" selected>All</option>
-              <option value="value2" *ngFor="let radio of radios">{{radio.country_2_letterCode}}</option>
-            </select>
-          </td>
-          <td>
-            <select name="select" class="select">
-              <option value="value1" selected>All</option>
-              <option value="value2" *ngFor="let radio of radios">{{radio.genreName}}</option>
-            </select>
-          </td>
-          <td>
-            <button>dark</button>
-            <button>light</button>
-          </td>
-        </tr>
-      </table>
-      <table class="list-song">
-        <tr class="song-info" [ngStyle]="{'height': '50px'}">
-          <th>#</th>
-          <th>Radio Statio</th>
-          <th>Genre</th>
-        </tr>
-        <tr class="song" *ngFor="let radio of radios; let idx = index" [ngStyle]="{'height': '50px'}">
-          <td class="idx">
-            {{idx + 1}}
-          </td>
-          <td class="radio">
-            {{radio.radioName}}
-          </td>
-          <td class="music">
-            {{radio.genreName}}
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="shadow"></div>
-  </div>
+  <app-drop-menu [radios]="radios"></app-drop-menu>
 
   <div class="info" [@info]="playerS.animatePlayerGetListRadio">
     <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">STRESSED OUT</h4>

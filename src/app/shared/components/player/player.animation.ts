@@ -13,8 +13,8 @@ export const animations = [
                 query('@disk', animateChild()),
                 query('@info', animateChild()),
                 query('@player-control', animateChild()),
-                query('@list', animateChild()),
                 query('@current', animateChild()),
+                query('@drop-menu', animateChild()),
                 animate('500ms ease-in'),
             ]),
         ])
@@ -78,7 +78,7 @@ export const animations = [
     ]),
 
 
-    trigger('list', [
+    trigger('drop-menu', [
         state('stop', style({
             height: '0px',
             opacity: '0',
@@ -91,11 +91,7 @@ export const animations = [
             position: 'absolute',
             bottom: '0'
         })),
-        transition('* <=> *', [
-            group([
-                animate('500ms ease-in'),
-            ])
-        ])
+        transition('* <=> *', animate('500ms ease-in'))
     ]),
 
     trigger('current', [

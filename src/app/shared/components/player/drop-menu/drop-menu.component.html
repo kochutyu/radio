@@ -1,0 +1,7 @@
+<div class="drop-menu" [@drop-menu]="playerS.animatePlayerGetListRadio" #dropList>
+  <div *ngIf="radios.length>0">
+    <app-radio-filter [radios]="radios"></app-radio-filter>
+    <app-radio-list [radios]="radios"></app-radio-list>
+  </div>
+  <div class="shadow"></div>
+</div>

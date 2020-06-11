@@ -244,3 +244,37 @@ button:hover {
   background: #ff564c;
   cursor: pointer;
 }
+
+.table {
+  background-color: #111;
+  width: inherit;
+  border-collapse: collapse;
+  border: 15px solid #111;
+  width: 100%;
+}
+
+.tr-head {
+  transform-origin: 0% 50%;
+  text-align: center;
+  background: #ff564c;
+  color: #111;
+  text-indent: 8px;
+  border: 5px solid #111;
+  line-height: 50px;
+}
+
+.tr {
+  transform-origin: 0% 50%;
+  transition: all 0.5s ease-in;
+  text-align: center;
+  background: #1d1d1d;
+  text-indent: 8px;
+  border: 5px solid #111;
+  line-height: 50px;
+
+  &:hover {
+    background: #222;
+    cursor: pointer;
+    color: #ff564c;
+  }
+}

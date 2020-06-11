@@ -1,0 +1,25 @@
+<table id="radio-filter" class="table filter" [ngStyle]="{'width': '100%'}">
+  <tr class="tr-head" [ngStyle]="{'height': '50px'}">
+    <th>Country</th>
+    <th>Genre</th>
+    <th>Theme</th>
+  </tr>
+  <tr class="tr">
+    <td>
+      <select name="select" class="select">
+        <option value="value1" selected>All</option>
+        <option value="value2" *ngFor="let radio of radios">{{radio.country_2_letterCode}}</option>
+      </select>
+    </td>
+    <td>
+      <select name="select" class="select">
+        <option value="value1" selected>All</option>
+        <option value="value2" *ngFor="let radio of radios">{{radio.genreName}}</option>
+      </select>
+    </td>
+    <td>
+      <button>dark</button>
+      <button>light</button>
+    </td>
+  </tr>
+</table>
