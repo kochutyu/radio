@@ -6,7 +6,7 @@ import { animations } from '../player.animation';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  animations
+  animations: animations
 })
 export class NavbarComponent implements OnInit {
 

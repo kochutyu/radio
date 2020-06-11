@@ -7,7 +7,7 @@ import { RadioService } from '../../services/radio.service';
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss'],
-  animations
+  animations: animations
 })
 export class PlayerComponent implements OnInit {
   radios: any = [];

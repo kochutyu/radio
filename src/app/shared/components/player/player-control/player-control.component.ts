@@ -7,7 +7,7 @@ import { PlayerService } from 'src/app/shared/services/player.service';
   selector: 'app-player-control',
   templateUrl: './player-control.component.html',
   styleUrls: ['./player-control.component.scss'],
-  animations
+  animations: animations
 })
   
 export class PlayerControlComponent implements OnInit {
