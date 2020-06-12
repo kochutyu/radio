@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { RadioService } from 'src/app/shared/services/radio.service';
 import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/shared/services/loader.service';
 
 @Component({
   selector: 'app-radio-filter',
@@ -19,7 +20,8 @@ export class RadioFilterComponent implements OnInit {
 
   constructor(
     public playerS: PlayerService,
-    private radioS: RadioService
+    private radioS: RadioService,
+    public loadS: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -32,14 +34,16 @@ export class RadioFilterComponent implements OnInit {
   }
 
   onChange(): void {
+    this.loadS.dropMenu = true;
+    this.playerS.radios = [];
     this.$country = this.radioS.getRadioSearch(this.form.value.country, this.form.value.genre, '').subscribe(res => {
       this.playerS.radios = res.results;
+      this.loadS.dropMenu = false;
       this.$country.unsubscribe();
     }, err => console.log(err));
   }
 
   onGenre(): void {
-    // this.playerS.settings.defaultGenre = this.form.value.genre;
     this.playerS.filterPlayerForm = this.form;
   }
 }

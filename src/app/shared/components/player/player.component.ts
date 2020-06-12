@@ -3,6 +3,7 @@ import { animations } from './player.animation';
 import { PlayerService } from '../../services/player.service';
 import { RadioService } from '../../services/radio.service';
 import { Subscription, forkJoin } from 'rxjs';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-player',
@@ -16,7 +17,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   @ViewChild('audio', { static: true }) audio: ElementRef;
   constructor(
     public playerS: PlayerService,
-    private radioS: RadioService
+    private radioS: RadioService,
+    public loadS: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   getRadios(): void {
+    this.loadS.player = true;
     this.$radios = forkJoin([
       this.radioS.getRadioSearch('UA'),
       this.radioS.getCountriesList(),
@@ -36,6 +39,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
       this.playerS.radios = res[0].results;
       this.playerS.country = res[1].results;
       this.playerS.genre = res[2].results;
+      this.loadS.player = false;
       this.$radios.unsubscribe();
     });
   }
