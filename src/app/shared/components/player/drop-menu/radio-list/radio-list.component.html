@@ -4,8 +4,8 @@
     <th>Radio Statio</th>
     <th>Genre</th>
   </tr>
-  <tr class="tr" *ngFor="let radio of radios; let idx = index" [ngStyle]="{'height': '50px'}"
-    (click)="playerS.selectRadio(radio)">
+  <tr class="tr" *ngFor="let radio of radios | genre:playerS.filterPlayerForm.value.genre; let idx = index"
+    [ngStyle]="{'height': '50px'}" (click)="playerS.selectRadio(radio)">
     <td class="idx">
       {{idx + 1}}
     </td>

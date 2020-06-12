@@ -1,14 +1,18 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { IPlayerRadioSearch, IPlayerRadioCountry, IPlayerRadioGenre } from '../shared.interfaces';
+import { IPlayerRadioSearch, IPlayerRadioCountry, IPlayerRadioGenre, ISettings } from '../shared.interfaces';
 import { Subscription, Subject, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { PlayerRadioSearch } from '../shares.model';
+import { PlayerRadioSearch, Settings } from '../shares.model';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerService {
+
+  settings:ISettings = new Settings('UA', 'ALL');
+
   animatePlayerGetListRadio: string = 'stop';
 
   radios: Array<IPlayerRadioSearch> = [];
@@ -16,7 +20,7 @@ export class PlayerService {
   genre: Array<IPlayerRadioGenre> = [];
 
   play: boolean;
-  error: boolean = false;
+  error: boolean;
   radioInitStatus: boolean;
 
   radio: IPlayerRadioSearch = new PlayerRadioSearch();
@@ -27,6 +31,8 @@ export class PlayerService {
   $radios: Subscription;
   $radioInit: Subscription;
   $error: Subject<any> = new Subject<any>();
+
+  filterPlayerForm: FormGroup;
 
   constructor(
     private http: HttpClient
@@ -46,7 +52,6 @@ export class PlayerService {
 
   playOrStopControl(play: boolean): void {
     this.play = this.play === true ? false : true;
-    console.log(play);
 
     if (this.play) {
       this.audio.nativeElement.play();
@@ -122,7 +127,6 @@ export class PlayerService {
       radiosNoExist.push(url);
       localStorage.setItem('radio-no-exist', JSON.stringify(radiosNoExist));
     }
-    console.log(JSON.parse(localStorage.getItem('radio-no-exist')));
   }
 
   filterRadioFromRadioWichNoExist(): void {

@@ -1,6 +1,6 @@
-import { IPlayerRadioSearch, IPlayerRadioNowPlaying } from './shared.interfaces';
+import { IPlayerRadioSearch, IPlayerRadioNowPlaying, ISettings } from './shared.interfaces';
 
-export class PlayerRadioSearch implements IPlayerRadioSearch{
+export class PlayerRadioSearch implements IPlayerRadioSearch {
     constructor(
         public radioID: string = '',
         public ganreID: string = '',
@@ -9,7 +9,7 @@ export class PlayerRadioSearch implements IPlayerRadioSearch{
         public genreName: string = '',
         public streamURL: string = '',
         public logoImg: string = '',
-    ){}
+    ) { }
 }
 
 export class PlayerRadioNowPlaying implements IPlayerRadioNowPlaying {
@@ -22,4 +22,11 @@ export class PlayerRadioNowPlaying implements IPlayerRadioNowPlaying {
         public radioLogo: string = '',
         public date: Date = new Date(),
     ) { }
+}
+
+export class Settings implements ISettings {
+    constructor(
+        public defaultCountry: string,
+        public defaultGenre: string
+    ) {}
 }

@@ -12,6 +12,7 @@ import { PlayerService } from './services/player.service';
 import { RadioService } from './services/radio.service';
 import { RadioListComponent } from './components/player/drop-menu/radio-list/radio-list.component';
 import { RadioFilterComponent } from './components/player/drop-menu/radio-filter/radio-filter.component';
+import { GenrePipe } from './pipe/genre.pipe';
 
 @NgModule({
   declarations: [  
@@ -21,6 +22,7 @@ import { RadioFilterComponent } from './components/player/drop-menu/radio-filter
     DropMenuComponent,
     RadioListComponent,
     RadioFilterComponent,
+    GenrePipe
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { RadioFilterComponent } from './components/player/drop-menu/radio-filter
     NavbarComponent,
     DropMenuComponent,
     RadioListComponent,
-    RadioFilterComponent
+    RadioFilterComponent,
+    GenrePipe
   ],
   providers: [
     PlayerService,

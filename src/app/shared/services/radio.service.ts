@@ -152,8 +152,6 @@ export class RadioService {
   }
 
   convertToIPlayerRadioSearch(item: any): IPlayerRadioSearch {
-    console.log(item.u.sp);
-    // const url =
     return {
       radioID: item.i,
       ganreID: item.d,

@@ -38,3 +38,8 @@ export interface IPlayerRadioHit {
     songName: string;
     occurrences: string;
 } 
+
+export interface ISettings {
+    defaultCountry: string;
+    defaultGenre: string;
+}

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { RadioService } from 'src/app/shared/services/radio.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-radio-filter',
@@ -14,6 +15,8 @@ export class RadioFilterComponent implements OnInit {
 
   form: FormGroup;
 
+  $country: Subscription
+
   constructor(
     public playerS: PlayerService,
     private radioS: RadioService
@@ -21,23 +24,22 @@ export class RadioFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      country: new FormControl('UA'),
-      genre: new FormControl('ALL')
+      country: new FormControl(this.playerS.settings.defaultCountry),
+      genre: new FormControl(this.playerS.settings.defaultGenre)
     });
     console.log(this.form.value);
-    // this.playerS.playerFilter = this.form;
-
+    this.playerS.filterPlayerForm = this.form;
   }
 
   onChange(): void {
-    console.log(this.form.value.country);
-    console.log(this.form.value.genre);
-    // this.playerS.genre = this.form.value.genre;
-
-    this.radioS.getRadioSearch(this.form.value.country, this.form.value.genre, '').subscribe(res => {
-      // console.log(res.results);
+    this.$country = this.radioS.getRadioSearch(this.form.value.country, this.form.value.genre, '').subscribe(res => {
       this.playerS.radios = res.results;
-
+      this.$country.unsubscribe();
     }, err => console.log(err));
+  }
+
+  onGenre(): void {
+    // this.playerS.settings.defaultGenre = this.form.value.genre;
+    this.playerS.filterPlayerForm = this.form;
   }
 }
