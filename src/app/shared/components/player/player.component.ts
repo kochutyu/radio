@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { animations } from './player.animation';
 import { PlayerService } from '../../services/player.service';
 import { RadioService } from '../../services/radio.service';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-player',
@@ -28,11 +28,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   getRadios(): void {
-    this.$radios = this.radioS.getRadioSearch().subscribe(res => {
-      this.playerS.radios = res.results;
-
-      console.log(this.playerS.radios);
-    }, err => console.log(err), () => console.log('unsubscribe'));
+    this.$radios = forkJoin([
+      this.radioS.getRadioSearch('UA'),
+      this.radioS.getCountriesList(),
+      this.radioS.getMusicGenresList(),
+    ]).subscribe(res => {
+      this.playerS.radios = res[0].results;
+      this.playerS.country = res[1].results;
+      this.playerS.genre = res[2].results;
+      this.$radios.unsubscribe();
+    });
   }
 
   initRadio(): void{

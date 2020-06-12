@@ -20,7 +20,7 @@ export class RadioService {
     private http: HttpClient,
   ) { }
 
-  getRadioSearch(country: string = "UA", genre: string = "ALL", keyword: string = "pop"): Observable<any> {
+  getRadioSearch(country: string, genre: string = "ALL", keyword: string = ""): Observable<any> {
     return this.http
       .get(
         `https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?country=${country}&keyword=${keyword}&genre=${genre}`, {
@@ -145,7 +145,7 @@ export class RadioService {
 
   converObjectForRadio(data: any, method: any): any {
     const allObj: any = data.results;
-    const results: Array<IPlayerRadioNowPlaying> = [];
+    const results: Array<IPlayerRadioSearch | IPlayerRadioCountry | IPlayerRadioGenre> = [];
     for (const obj of allObj)
       results.push(method(obj));
     return results;

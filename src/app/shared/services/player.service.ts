@@ -1,5 +1,5 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { IPlayerRadioSearch } from '../shared.interfaces';
+import { IPlayerRadioSearch, IPlayerRadioCountry, IPlayerRadioGenre } from '../shared.interfaces';
 import { Subscription, Subject, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
@@ -12,7 +12,8 @@ export class PlayerService {
   animatePlayerGetListRadio: string = 'stop';
 
   radios: Array<IPlayerRadioSearch> = [];
-  allRadios: Array<IPlayerRadioSearch> = [];
+  country: Array<IPlayerRadioCountry> = [];
+  genre: Array<IPlayerRadioGenre> = [];
 
   play: boolean;
   error: boolean = false;
