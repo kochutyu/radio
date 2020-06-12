@@ -45,7 +45,7 @@ export class PlayerService {
   selectRadio(radio: IPlayerRadioSearch): void {
     this.radio = radio;
     this.radioInit(radio);
-    this.playOrStop(true);
+    this.play = true;
     this.error = false;
     this.dropMenu.nativeElement.click();
   }
@@ -108,10 +108,6 @@ export class PlayerService {
   }
   
   handleError(error: HttpErrorResponse): Observable<never> {
-    console.log('lol');
-    const { streamURL } = this.radio;
-    const { status, url } = error;
-    
     this.$error.next('Oops, something was wrong.');
 
     return throwError(error)
