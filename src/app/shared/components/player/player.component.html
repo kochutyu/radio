@@ -12,12 +12,19 @@
 
   <app-drop-menu [radios]="playerS.radios"></app-drop-menu>
 
-  <div class="info" [@info]="playerS.animatePlayerGetListRadio">
-    <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">STRESSED OUT</h4>
-    <h3>twenty one pilots - Blurryface</h3>
+  <div class="info" [@info]="playerS.animatePlayerGetListRadio" [ngStyle]="{'text-align': 'center'}">
+    <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">{{playerS.radio.radioName}}</h4>
+    <div class="error-message">
+      <h4 [ngStyle]="{'color': '#ff564c','text-align': 'center', 'margin': '0px'}">{{playerS.$error | async}}</h4>
+    </div>
+
+    <!-- 
+      ! API doesn't give some data about music
+     -->
+    <!-- <h3>MUSIC NAME</h3> -->
   </div>
 
-  <audio [src]="playerS.radio" preload="auto" id="audio" controls #audio *ngIf="playerS.radio"></audio>
+  <audio [src]="playerS.radio.streamURL" preload="auto" id="audio" autoplay controls #audio></audio>
   <app-player-control></app-player-control>
 
   <div class="current" [@current]="playerS.animatePlayerGetListRadio">

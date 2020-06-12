@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IPlayerRadioGenre, IPlayerRadioHit, IPlayerRadioNowPlaying, IPlayerRadioCountry, IPlayerRadioSearch } from '../interfaces';
-import { map, catchError } from "rxjs/operators";
-import { Observable, Subscription, Subject, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { IPlayerRadioGenre, IPlayerRadioHit, IPlayerRadioNowPlaying, IPlayerRadioCountry, IPlayerRadioSearch } from '../shared.interfaces';
+import { map } from "rxjs/operators";
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { RADIO_API } from 'src/environments/set-environments';
 
 const headers = {
@@ -16,16 +16,11 @@ const headers = {
 
 export class RadioService {
 
-  $radioInit: Subscription;
-  radioInitStatus: boolean;
-  radios: Array<IPlayerRadioSearch | IPlayerRadioNowPlaying> = [];
-  radio: IPlayerRadioSearch | IPlayerRadioNowPlaying;
-  $error: Subject<any> = new Subject<any>();
-  $streamURL: string = '';
+  constructor(
+    private http: HttpClient,
+  ) { }
 
-  constructor(private http: HttpClient) { }
-
-  getRadioSearch(country: string = "ALL", genre: string = "ALL", keyword: string = ""): Observable<any> {
+  getRadioSearch(country: string = "UA", genre: string = "ALL", keyword: string = "pop"): Observable<any> {
     return this.http
       .get(
         `https://30-000-radio-stations-and-music-charts.p.rapidapi.com/rapidapi?country=${country}&keyword=${keyword}&genre=${genre}`, {
@@ -157,6 +152,8 @@ export class RadioService {
   }
 
   convertToIPlayerRadioSearch(item: any): IPlayerRadioSearch {
+    console.log(item.u.sp);
+    // const url =
     return {
       radioID: item.i,
       ganreID: item.d,
@@ -202,71 +199,4 @@ export class RadioService {
     };
   }
 
-  radioInit(radio: IPlayerRadioSearch): void {
-    this.radioInitStatus ? this.$radioInit.unsubscribe() : this.radioInitStatus = true;
-    this.radio = radio;
-
-    const req = this.http.get(radio.streamURL).pipe(
-      catchError(this.handleError.bind(this))
-    )
-
-    this.$radioInit = req.subscribe(res => {
-    }, err => {
-      console.log(this.$streamURL);
-      this.$streamURL = '';
-      console.log(this.$streamURL);
-
-      this.$radioInit.unsubscribe();
-    });
-  }
-
-  handleError(error: HttpErrorResponse): Observable<never> {
-    const { streamURL } = this.radio;
-    const { status, url } = error;
-    switch (status) {
-      case 0:
-        this.$error.next('Something went wrong. The radio has been removed from the general list.');
-        alert('0');
-        this.saveRadioWichNoExist(streamURL);
-        this.filterRadioFromRadioWichNoExist();
-        break;
-      case 200:
-        this.$error.next('Something went wrong. The radio has been removed from the general list.');
-        alert('200');
-        this.saveRadioWichNoExist(streamURL);
-        this.filterRadioFromRadioWichNoExist();
-        break;
-      case 304:
-        this.$error.next('Something went wrong. The radio has been removed from the general list.');
-        alert('304');
-        this.saveRadioWichNoExist(streamURL);
-        this.filterRadioFromRadioWichNoExist();
-        break;
-    }
-
-    return throwError(error)
-  }
-
-  saveRadioWichNoExist(url: string): void {
-    if (localStorage.getItem('radio-no-exist')) {
-      const radiosNoExist: Array<string> = JSON.parse(localStorage.getItem('radio-no-exist'));
-      radiosNoExist.push(url)
-      localStorage.setItem('radio-no-exist', JSON.stringify(radiosNoExist));
-    } else {
-      const radiosNoExist = [];
-      radiosNoExist.push(url);
-      localStorage.setItem('radio-no-exist', JSON.stringify(radiosNoExist));
-    }
-    console.log(JSON.parse(localStorage.getItem('radio-no-exist')));
-  }
-
-  filterRadioFromRadioWichNoExist(): void {
-    if (localStorage.getItem('radio-no-exist')) {
-      const radiosNoExist = JSON.parse(localStorage.getItem('radio-no-exist'));
-      for (const radioURL of radiosNoExist) {
-        this.radios = this.radios.filter(radio => radio.streamURL !== radioURL);
-      }
-    }
-  }
-  
 }

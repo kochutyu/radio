@@ -1,4 +1,4 @@
-import { IRadioAPI } from 'src/app/shared/interfaces';
+import { IRadioAPI } from 'src/app/shared/shared.interfaces';
 
 export const RADIO_API: IRadioAPI = {
     host: "30-000-radio-stations-and-music-charts.p.rapidapi.com",

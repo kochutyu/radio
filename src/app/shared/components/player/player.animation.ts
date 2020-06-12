@@ -53,11 +53,9 @@ export const animations = [
 
     trigger('info-title-text', [
         state('stop', style({
-            margin: '0 0 5px 29px',
             color: '#fff'
         })),
         state('animate', style({
-            margin: '0',
             color: '#111'
         })),
         transition('* <=> *', animate('500ms ease-in'))

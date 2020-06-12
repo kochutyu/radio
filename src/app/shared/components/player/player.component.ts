@@ -20,6 +20,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.initRadio();
   }
 
   ngOnDestroy(): void {
@@ -28,14 +29,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   getRadios(): void {
     this.$radios = this.radioS.getRadioSearch().subscribe(res => {
-      this.playerS.radios = res.results.splice(0, 100);
-      this.playerS.$radios = this.$radios;
+      this.playerS.radios = res.results;
+
+      console.log(this.playerS.radios);
     }, err => console.log(err), () => console.log('unsubscribe'));
   }
 
   initRadio(): void{
     this.playerS.audio = this.audio;
-
     this.getRadios();
   }
 
