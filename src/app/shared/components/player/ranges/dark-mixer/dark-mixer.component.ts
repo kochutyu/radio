@@ -6,12 +6,13 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
   styleUrls: ['./dark-mixer.component.scss']
 })
 export class DarkMixerComponent implements OnInit {
-  @Output() onValue: EventEmitter<string> = new EventEmitter<string>();
 
-  // SETTINGS
+  // *SETTINGS
   @Input() name: string = '';
   @Input() id: string = '';
   @Input() value: number = 100;
+  
+  @Output() onValue: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 

@@ -12,7 +12,9 @@ import { FormGroup } from '@angular/forms';
 export class PlayerService {
 
   settings:ISettings = new Settings('UA', 'ALL');
+  radio: IPlayerRadioSearch = new PlayerRadioSearch();
 
+  $error: string;
   animatePlayerGetListRadio: string = 'stop';
 
   radios: Array<IPlayerRadioSearch> = [];
@@ -23,15 +25,12 @@ export class PlayerService {
   error: boolean;
   radioInitStatus: boolean;
   lightTheme: boolean;
-
-  radio: IPlayerRadioSearch = new PlayerRadioSearch();
   
   audio: ElementRef;
   dropMenu: ElementRef;
   
   $radios: Subscription;
   $radioInit: Subscription;
-  $error: string;
 
   filterPlayerForm: FormGroup;
 

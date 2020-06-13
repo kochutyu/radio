@@ -6,13 +6,14 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./light-mixer.component.scss']
 })
 export class LightMixerComponent implements OnInit {
-  @Output() onValue: EventEmitter<string> = new EventEmitter<string>();
 
   // SETTINGS
   @Input() name: string = '';
   @Input() id: string = '';
   @Input() value: number = 100;
-
+  
+  @Output() onValue: EventEmitter<string> = new EventEmitter<string>();
+  
   constructor() { }
 
   ngOnInit(): void {

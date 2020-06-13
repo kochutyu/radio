@@ -10,6 +10,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
   animations: animations,
 })
 export class DropMenuComponent implements OnInit {
+  
   @Input() radios: any = [];
   
   constructor(
@@ -19,4 +20,5 @@ export class DropMenuComponent implements OnInit {
 
   ngOnInit(): void {    
   }
+
 }

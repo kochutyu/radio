@@ -7,6 +7,7 @@ import { PlayerService } from 'src/app/shared/services/player.service';
   styleUrls: ['./radio-list.component.scss']
 })
 export class RadioListComponent implements OnInit {
+  
   @Input() radios: any = [];
 
   constructor(
@@ -15,4 +16,5 @@ export class RadioListComponent implements OnInit {
   
   ngOnInit(): void {
   }
+
 }

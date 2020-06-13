@@ -11,12 +11,14 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
   styleUrls: ['./radio-filter.component.scss']
 })
 export class RadioFilterComponent implements OnInit {
+  
   @Input() radios: any = [];
+
   @ViewChild('genreOptionAll') genreOptionAll: ElementRef;
 
-  form: FormGroup;
-
   $country: Subscription
+  
+  form: FormGroup;
 
   constructor(
     public playerS: PlayerService,
@@ -46,4 +48,5 @@ export class RadioFilterComponent implements OnInit {
   onGenre(): void {
     this.playerS.filterPlayerForm = this.form;
   }
+
 }

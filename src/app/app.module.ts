@@ -1,10 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
+// TODO: MODULES
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+// TODO: COMPONENTS
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -13,8 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
-    FontAwesomeModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

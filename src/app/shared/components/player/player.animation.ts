@@ -1,6 +1,7 @@
 import { trigger, state, style, transition, group, query, animateChild, animate } from '@angular/animations';
 
 export const animations = [
+
     trigger('menu-ul', [
         state('stop', style({
             backgroundColor: '#111',
@@ -34,7 +35,6 @@ export const animations = [
         })),
         transition('* <=> *', animate('500ms ease-in'))
     ]),
-
     trigger('info', [
         state('stop', style({
             left: '50%',
@@ -51,7 +51,6 @@ export const animations = [
             ]),
         ])
     ]),
-
     trigger('info-title-text', [
         state('stop', style({
             color: '#fff'
@@ -61,7 +60,6 @@ export const animations = [
         })),
         transition('* <=> *', animate('500ms ease-in'))
     ]),
-
     trigger('player-control', [
         state('stop', style({
             transform: 'scale(1) translate(-50%, 0)',
@@ -75,8 +73,6 @@ export const animations = [
         })),
         transition('* <=> *', animate('500ms ease-in'))
     ]),
-
-
     trigger('drop-menu', [
         state('stop', style({
             height: '0px',
@@ -92,7 +88,6 @@ export const animations = [
         })),
         transition('* <=> *', animate('500ms ease-in'))
     ]),
-
     trigger('current', [
         state('stop', style({
             bottom: '-100%'
@@ -102,7 +97,6 @@ export const animations = [
         })),
         transition('* <=> *', animate('500ms ease-in'))
     ]),
-
     trigger('current', [
         state('stop', style({
             bottom: '-100%'

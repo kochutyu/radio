@@ -72,7 +72,8 @@
   top: 60%;
   transform: translate(-50%, 0);
   transition: all 0.3s ease-in;
-  h4{
+
+  h4 {
     margin: 0;
   }
 }
@@ -84,6 +85,14 @@
   transition: all 0.3s ease-in;
 }
 
+.mixer {
+  position: absolute;
+  z-index: 2;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
 @keyframes rotade {
   0% {
     transform: rotate(0deg);
@@ -92,12 +101,4 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.mixer{
-  position: absolute;
-  z-index: 2;
-  top: 90%;
-  left: 50%;
-  transform: translate(-50%);
 }

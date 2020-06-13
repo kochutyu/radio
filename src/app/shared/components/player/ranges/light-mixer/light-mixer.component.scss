@@ -1,3 +1,4 @@
+// TODO: THUMB
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: 1px solid #D03E8B;
@@ -34,7 +35,7 @@ input[type=range]::-ms-thumb {
 }
 
 
-// *TODO: TRACK
+// TODO: TRACK
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 5px;

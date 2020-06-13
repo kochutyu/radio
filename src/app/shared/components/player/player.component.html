@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
+
 <app-loader [load]="loadS.player"></app-loader>
+
 <article class="screen" [@menu-ul]="playerS.animatePlayerGetListRadio">
 
   <div class="cover-img" [@disk]="playerS.animatePlayerGetListRadio">
@@ -18,28 +20,23 @@
     <div class="error-message" *ngIf="playerS.error">
       <h4 [ngStyle]="{'color': '#ff564c','text-align': 'center', 'margin': '0px'}">{{playerS.$error}}</h4>
     </div>
-
-    <!-- 
-      ! API doesn't give some data about music
-     -->
-    <!-- <h3>MUSIC NAME</h3> -->
   </div>
 
   <div class="mixer-theme">
-    <app-dark-mixer class="mixer" *ngIf="!playerS.lightTheme" (onValue)="volume($event)"
-    [@volume]="playerS.animatePlayerGetListRadio"
-    ></app-dark-mixer>
-    <app-light-mixer class="mixer" *ngIf="playerS.lightTheme" (onValue)="volume($event)"
-    [@volume]="playerS.animatePlayerGetListRadio"
-    ></app-light-mixer>
+    <app-light-mixer class="mixer" *ngIf="playerS.lightTheme; else darkTheme" (onValue)="volume($event)"
+      [@volume]="playerS.animatePlayerGetListRadio"></app-light-mixer>
+    <ng-template #darkTheme>
+      <app-dark-mixer class="mixer" (onValue)="volume($event)"
+        [@volume]="playerS.animatePlayerGetListRadio"></app-dark-mixer>
+    </ng-template>
   </div>
 
   <audio [src]="playerS.radio.streamURL" preload="auto" id="audio" autoplay controls #audio></audio>
+
   <app-player-control></app-player-control>
 
   <div class="current" [@current]="playerS.animatePlayerGetListRadio">
     <h2>Radio By KochuTok</h2>
   </div>
 
-  <app-player-control></app-player-control>
 </article>

@@ -1,24 +1,31 @@
-import { NgModule } from '@angular/core';
+// TODO: MODULES
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { PlayerComponent } from './components/player/player.component';
-import { NavbarComponent } from './components/player/navbar/navbar.component';
-import { PlayerControlComponent } from './components/player/player-control/player-control.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// TODO: COMPONENTS
+import { PlayerControlComponent } from './components/player/player-control/player-control.component';
+import { PlayerComponent } from './components/player/player.component';
+import { NavbarComponent } from './components/player/navbar/navbar.component';
 import { DropMenuComponent } from './components/player/drop-menu/drop-menu.component';
-import { PlayerService } from './services/player.service';
-import { RadioService } from './services/radio.service';
 import { RadioListComponent } from './components/player/drop-menu/radio-list/radio-list.component';
 import { RadioFilterComponent } from './components/player/drop-menu/radio-filter/radio-filter.component';
-import { GenrePipe } from './pipe/genre.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
 import { DarkMixerComponent } from './components/player/ranges/dark-mixer/dark-mixer.component';
 import { LightMixerComponent } from './components/player/ranges/light-mixer/light-mixer.component';
 
+// TODO: PIPES
+import { GenrePipe } from './pipe/genre.pipe';
+
+// TODO: SERVICES
+import { PlayerService } from './services/player.service';
+import { RadioService } from './services/radio.service';
+
 @NgModule({
-  declarations: [  
+  declarations: [
     PlayerComponent,
     NavbarComponent,
     PlayerControlComponent,

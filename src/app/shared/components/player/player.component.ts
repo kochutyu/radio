@@ -12,9 +12,13 @@ import { LoaderService } from '../../services/loader.service';
   animations: animations
 })
 export class PlayerComponent implements OnInit, OnDestroy {
+  
   radios: any = [];
+
   $radios: Subscription;
+
   @ViewChild('audio', { static: true }) audio: ElementRef;
+
   constructor(
     public playerS: PlayerService,
     private radioS: RadioService,
@@ -27,6 +31,26 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.$radios.unsubscribe();
+  }
+
+  @HostListener('window:keyup', ['$event']) keyEvent(event: KeyboardEvent) {
+
+    if (event.key === ' ') {
+      this.playerS.playOrStop();
+    }
+
+    if (event.key === 'ArrowRight') {
+      this.playerS.forwardRadio();
+    }
+
+    if (event.key === 'ArrowLeft') {
+      this.playerS.backwardRadio();
+    }
+
+    if (event.key === 'Escape') {
+      this.playerS.dropMenu.nativeElement.click();
+    }
+
   }
 
   getRadios(): void {
@@ -49,26 +73,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.getRadios();
   }
 
-  @HostListener('window:keyup', ['$event']) keyEvent(event: KeyboardEvent) {
-    if (event.key === ' ') {
-      this.playerS.playOrStop();
-    }
-
-    if (event.key === 'ArrowRight') {
-      this.playerS.forwardRadio();
-    }
-
-    if (event.key === 'ArrowLeft') {
-      this.playerS.backwardRadio();
-    }
-
-    if (event.key === 'Escape') {
-      this.playerS.dropMenu.nativeElement.click();
-    }
-  }
-
   volume(val: string): void{
     const volume = +val/100
     this.audio.nativeElement.volume = volume;
   }
+
 }

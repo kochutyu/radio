@@ -9,7 +9,9 @@ import { animations } from '../player.animation';
   animations: animations
 })
 export class NavbarComponent implements OnInit {
+
   @ViewChild('dropMenu', { static: true }) dropMenu: ElementRef;
+  
   constructor(
     public playerS: PlayerService
   ) { }
