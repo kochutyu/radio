@@ -68,6 +68,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   volume(val: string): void{
-    console.log(val);
+    const volume = +val/100
+    this.audio.nativeElement.volume = volume;
   }
 }
