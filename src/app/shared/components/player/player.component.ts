@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener } from '@angular/core';
 import { animations } from './player.animation';
 import { PlayerService } from '../../services/player.service';
 import { RadioService } from '../../services/radio.service';
@@ -44,9 +44,27 @@ export class PlayerComponent implements OnInit, OnDestroy {
     });
   }
 
-  initRadio(): void{
+  initRadio(): void {
     this.playerS.audio = this.audio;
     this.getRadios();
+  }
+
+  @HostListener('window:keyup', ['$event']) keyEvent(event: KeyboardEvent) {
+    if (event.key === ' ') {
+      this.playerS.playOrStop();
+    }
+
+    if (event.key === 'ArrowRight') {
+      this.playerS.forwardRadio();
+    }
+
+    if (event.key === 'ArrowLeft') {
+      this.playerS.backwardRadio();
+    }
+
+    if (event.key === 'Escape') {
+      this.playerS.dropMenu.nativeElement.click();
+    }
   }
 
 }
