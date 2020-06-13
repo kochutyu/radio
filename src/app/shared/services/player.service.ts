@@ -30,7 +30,8 @@ export class PlayerService {
   
   $radios: Subscription;
   $radioInit: Subscription;
-  $error: Subject<any> = new Subject<any>();
+  // $error: Subject<any> = new Subject<any>();
+  $error: string;
 
   filterPlayerForm: FormGroup;
 
@@ -108,8 +109,8 @@ export class PlayerService {
   }
   
   handleError(error: HttpErrorResponse): Observable<never> {
-    this.$error.next('Oops, something was wrong.');
-
+    this.$error = 'Oops, something was wrong.';
+    this.error = true;
     return throwError(error)
   }
 
