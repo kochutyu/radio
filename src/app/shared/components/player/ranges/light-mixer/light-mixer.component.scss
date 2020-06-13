@@ -1,0 +1,96 @@
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #D03E8B;
+  height: 25px;
+  width: 10px;
+  border-radius: 3px;
+  background: #D03E8B;
+  cursor: pointer;
+  margin-top: -11px;
+  box-shadow: 1px 1px 1px #D03E8B,
+    0px 0px 1px #D03E8B;
+}
+
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #D03E8B,
+    0px 0px 1px #D03E8B;
+  border: 1px solid #D03E8B;
+  height: 25px;
+  width: 10px;
+  border-radius: 3px;
+  background: #D03E8B;
+  cursor: pointer;
+}
+
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #D03E8B,
+    0px 0px 1px #D03E8B;
+  border: 1px solid #D03E8B;
+  height: 25px;
+  width: 10px;
+  border-radius: 3px;
+  background: #D03E8B;
+  cursor: pointer;
+}
+
+
+// *TODO: TRACK
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #BF605B,
+    0px 0px 1px #BF605B;
+  background: #BF605B;
+  border-radius: 1.3px;
+  border: 0.2px solid #BF605B;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #BF605B;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #BF605B,
+    0px 0px 1px #BF605B;
+  background: #BF605B;
+  border-radius: 1.3px;
+  border: 0.2px solid #BF605B;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+  background: #BF605B;
+  border: 0.2px solid #BF605B;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #BF605B,
+    0px 0px 1px #BF605B;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+  background: #BF605B;
+}
+
+input[type=range]::-ms-fill-upper {
+  background: #BF605B;
+  border: 0.2px solid #BF605B;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #BF605B,
+    0px 0px 1px #BF605B;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: #BF605B;
+}

@@ -93,3 +93,11 @@
     transform: rotate(360deg);
   }
 }
+
+.mixer{
+  position: absolute;
+  z-index: 2;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%);
+}

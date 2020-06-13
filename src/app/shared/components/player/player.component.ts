@@ -67,4 +67,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
   }
 
+  volume(val: string): void{
+    console.log(val);
+  }
 }

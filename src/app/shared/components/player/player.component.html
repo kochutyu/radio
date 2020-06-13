@@ -25,6 +25,11 @@
     <!-- <h3>MUSIC NAME</h3> -->
   </div>
 
+  <div class="mixer-theme">
+    <app-dark-mixer class="mixer" *ngIf="!playerS.lightTheme" (onValue)="volume($event)"></app-dark-mixer>
+    <app-light-mixer class="mixer" *ngIf="playerS.lightTheme" (onValue)="volume($event)"></app-light-mixer>
+  </div>
+
   <audio [src]="playerS.radio.streamURL" preload="auto" id="audio" autoplay controls #audio></audio>
   <app-player-control></app-player-control>
 

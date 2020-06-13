@@ -22,6 +22,7 @@ export class PlayerService {
   play: boolean;
   error: boolean;
   radioInitStatus: boolean;
+  lightTheme: boolean;
 
   radio: IPlayerRadioSearch = new PlayerRadioSearch();
   
@@ -30,7 +31,6 @@ export class PlayerService {
   
   $radios: Subscription;
   $radioInit: Subscription;
-  // $error: Subject<any> = new Subject<any>();
   $error: string;
 
   filterPlayerForm: FormGroup;

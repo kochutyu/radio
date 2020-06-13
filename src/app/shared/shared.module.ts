@@ -14,6 +14,8 @@ import { RadioListComponent } from './components/player/drop-menu/radio-list/rad
 import { RadioFilterComponent } from './components/player/drop-menu/radio-filter/radio-filter.component';
 import { GenrePipe } from './pipe/genre.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
+import { DarkMixerComponent } from './components/player/ranges/dark-mixer/dark-mixer.component';
+import { LightMixerComponent } from './components/player/ranges/light-mixer/light-mixer.component';
 
 @NgModule({
   declarations: [  
@@ -24,7 +26,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     RadioListComponent,
     RadioFilterComponent,
     GenrePipe,
-    LoaderComponent
+    LoaderComponent,
+    DarkMixerComponent,
+    LightMixerComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     RadioListComponent,
     RadioFilterComponent,
     GenrePipe,
-    LoaderComponent
+    LoaderComponent,
+    DarkMixerComponent,
+    LightMixerComponent
   ],
   providers: [
     PlayerService,
