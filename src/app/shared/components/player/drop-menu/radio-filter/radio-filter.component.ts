@@ -13,6 +13,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
 export class RadioFilterComponent implements OnInit {
   
   @Input() radios: any = [];
+  @Input() lightTheme: boolean;
 
   @ViewChild('genreOptionAll') genreOptionAll: ElementRef;
 
@@ -47,6 +48,14 @@ export class RadioFilterComponent implements OnInit {
 
   onGenre(): void {
     this.playerS.filterPlayerForm = this.form;
+  }
+
+  onDarkTheme(): void{
+    this.playerS.changeTheme(false);
+  }
+
+  onLightTheme(): void {
+    this.playerS.changeTheme(true);
   }
 
 }

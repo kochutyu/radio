@@ -133,7 +133,7 @@ audio {
   display: none;
 }
 
-.select{
+.select {
   display: block;
   font-size: 16px;
   font-family: sans-serif;
@@ -280,9 +280,9 @@ button:hover {
 }
 
 input[type=range] {
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 150px; /* Specific width is required for Firefox. */
-  background: transparent; /* Otherwise white in Chrome */
+  -webkit-appearance: none;
+  width: 150px;
+  background: transparent;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -290,15 +290,62 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 input[type=range]:focus {
-  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+  outline: none;
 }
 
 input[type=range]::-ms-track {
   width: 100%;
   cursor: pointer;
-
-  /* Hides the slider so custom styles can be added */
   background: transparent;
   border-color: transparent;
   color: transparent;
+}
+
+.light-theme {
+  background-color: #FFE6F3;
+
+  .filter {
+    tr {
+      &:hover {
+        background-color: #FFE7E6;
+      }
+    }
+  }
+
+  .theme-btn{
+    background-color: #AD00FF;
+  }
+
+  tr {
+    background-color: #FFE7E6;
+
+    &:hover {
+      background-color: #FF8680;
+      color: red;
+    }
+  }
+
+
+  th {
+    color: #4D0028;
+    background-color: #FF80C3;
+  }
+
+  td {
+    color: #4D0028;
+  }
+
+  .forward,
+  .play,
+  .backward{
+    color: #6B4080;
+  }
+
+  .shadow{
+    background-color: #ffffff;
+  }
+
+  .cover-img__relative-dinamic-color{
+    background-color: red !important;
+  }
 }

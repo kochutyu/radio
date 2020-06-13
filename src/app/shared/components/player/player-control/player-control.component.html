@@ -1,4 +1,7 @@
-<table class="player" [@player-control]="playerS.animatePlayerGetListRadio">
+<table [@player-control]="playerS.animatePlayerGetListRadio" [ngClass]="{
+  'player': true,
+  'light-theme': lightTheme
+}">
   <td>
     <label class="backward" for="backward" (click)="playerS.backwardRadio()"></label>
     <input type="checkbox" id="backward" class="hiden" />

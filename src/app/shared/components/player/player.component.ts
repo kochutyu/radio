@@ -4,7 +4,6 @@ import { PlayerService } from '../../services/player.service';
 import { RadioService } from '../../services/radio.service';
 import { Subscription, forkJoin } from 'rxjs';
 import { LoaderService } from '../../services/loader.service';
-
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',

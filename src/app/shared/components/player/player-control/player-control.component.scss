@@ -2,7 +2,6 @@
   background: none;
   text-align: center;
   font-family: FontAwesome;
-  color: #fff;
   font-size: 26px;
   line-height: 26px;
   width: 216px;
@@ -15,21 +14,22 @@
   transition: all 0.3s ease-in;
   border-spacing: 0;
 
-  td{
-    width: 72px;
+  .play:hover,
+  .forward:hover:before,
+  .backward:hover:before {
+    color: #bbb;
+    transition: all 0.15s linear;
   }
 }
 
-.play:hover,
-.forward:hover:before,
-.backward:hover:before{
-  color: #bbb;
-  transition: all 0.15s linear;
+td {
+  width: 72px;
+  color: #fff;
 }
 
 .play,
 .forward:before,
-.backward:before{
+.backward:before {
   cursor: pointer;
   z-index: 100;
   transition: all 0.15s linear;

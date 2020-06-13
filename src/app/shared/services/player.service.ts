@@ -1,10 +1,14 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { IPlayerRadioSearch, IPlayerRadioCountry, IPlayerRadioGenre, ISettings } from '../shared.interfaces';
-import { Subscription, Subject, Observable, throwError } from 'rxjs';
+import { Subscription, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { PlayerRadioSearch, Settings } from '../shares.model';
 import { FormGroup } from '@angular/forms';
+
+export let THEME = {
+  bgColor: '#111'
+}
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +20,7 @@ export class PlayerService {
 
   $error: string;
   animatePlayerGetListRadio: string = 'stop';
+  bgColor: string = 'dark';
 
   radios: Array<IPlayerRadioSearch> = [];
   country: Array<IPlayerRadioCountry> = [];
@@ -24,7 +29,7 @@ export class PlayerService {
   play: boolean;
   error: boolean;
   radioInitStatus: boolean;
-  lightTheme: boolean;
+  lightTheme: boolean = false;
   
   audio: ElementRef;
   dropMenu: ElementRef;
@@ -37,6 +42,10 @@ export class PlayerService {
   constructor(
     private http: HttpClient
   ) { }
+
+  changeTheme(lightTheme: boolean): void{
+    this.lightTheme = lightTheme;
+  }
 
   animatePlayer(): void {
     this.animatePlayerGetListRadio = this.animatePlayerGetListRadio === 'stop' ? 'animate' : 'stop';

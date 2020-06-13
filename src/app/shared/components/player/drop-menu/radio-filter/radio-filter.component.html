@@ -1,6 +1,10 @@
 <form [formGroup]="form">
-  <table id="radio-filter" class="table filter" [ngStyle]="{'width': '100%'}">
-    <tr class="tr-head" [ngStyle]="{'height': '50px'}">
+  <table id="radio-filter" [ngStyle]="{'width': '100%'}" [ngClass]="{
+    'table': true,
+    'filter': true,
+    'light-theme': lightTheme
+  }">
+    <tr class="tr-head" [ngStyle]="{'height': '50px'}" >
       <th>Country</th>
       <th>Genre</th>
       <th>Theme</th>
@@ -20,8 +24,8 @@
         </select>
       </td>
       <td>
-        <button>dark</button>
-        <button>light</button>
+        <button class="theme-btn" (click)="onDarkTheme()">dark</button>
+        <button class="theme-btn" (click)="onLightTheme()">light</button>
       </td>
     </tr>
   </table>

@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <app-drop-menu [radios]="playerS.radios"></app-drop-menu>
+  <app-drop-menu [radios]="playerS.radios" [lightTheme]="playerS.lightTheme"></app-drop-menu>
 
   <div class="info" [@info]="playerS.animatePlayerGetListRadio" [ngStyle]="{'text-align': 'center'}">
     <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">{{playerS.radio.radioName}}</h4>
@@ -32,8 +32,8 @@
   </div>
 
   <audio [src]="playerS.radio.streamURL" preload="auto" id="audio" autoplay controls #audio></audio>
-
-  <app-player-control></app-player-control>
+<!-- ?TRUE -->
+  <app-player-control [lightTheme]="playerS.lightTheme"></app-player-control>
 
   <div class="current" [@current]="playerS.animatePlayerGetListRadio">
     <h2>Radio By KochuTok</h2>

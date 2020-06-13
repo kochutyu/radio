@@ -12,7 +12,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
 export class DropMenuComponent implements OnInit {
   
   @Input() radios: any = [];
-  
+  @Input() lightTheme: boolean;
   constructor(
     public playerS: PlayerService,
     public loadS: LoaderService
