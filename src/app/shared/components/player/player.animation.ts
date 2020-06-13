@@ -15,6 +15,7 @@ export const animations = [
                 query('@player-control', animateChild()),
                 query('@current', animateChild()),
                 query('@drop-menu', animateChild()),
+                query('@volume', animateChild()),
                 animate('500ms ease-in'),
             ]),
         ])
@@ -111,14 +112,13 @@ export const animations = [
         })),
         transition('* <=> *', animate('500ms ease-in'))
     ]),
-
-    trigger('disk-img', [
-        state('stop-disk-img', style({
-            bottom: '-100%'
+    trigger('volume', [
+        state('stop', style({
+            opacity: '1'
         })),
-        state('animate-disk-img', style({
-            bottom: '10px'
+        state('animate', style({
+            opacity: '0'
         })),
-        transition('* <=> *', animate('3000ms ease-in'))
+        transition('* <=> *', animate('200ms ease-in'))
     ]),
 ];

@@ -26,8 +26,12 @@
   </div>
 
   <div class="mixer-theme">
-    <app-dark-mixer class="mixer" *ngIf="!playerS.lightTheme" (onValue)="volume($event)"></app-dark-mixer>
-    <app-light-mixer class="mixer" *ngIf="playerS.lightTheme" (onValue)="volume($event)"></app-light-mixer>
+    <app-dark-mixer class="mixer" *ngIf="!playerS.lightTheme" (onValue)="volume($event)"
+    [@volume]="playerS.animatePlayerGetListRadio"
+    ></app-dark-mixer>
+    <app-light-mixer class="mixer" *ngIf="playerS.lightTheme" (onValue)="volume($event)"
+    [@volume]="playerS.animatePlayerGetListRadio"
+    ></app-light-mixer>
   </div>
 
   <audio [src]="playerS.radio.streamURL" preload="auto" id="audio" autoplay controls #audio></audio>
