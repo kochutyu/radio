@@ -321,15 +321,19 @@ input[type=range]::-ms-track {
     background-color: #FFE7E6;
 
     &:hover {
-      background-color: #FF8680;
+      background-color: #f8afff;
       color: red;
     }
   }
 
+  table{
+    border: 15px solid #5c677d;
+  }
+
 
   th {
-    color: #4D0028;
-    background-color: #FF80C3;
+    color: #111;
+    background-color: #ff6b6c;
   }
 
   td {
@@ -339,7 +343,7 @@ input[type=range]::-ms-track {
   .forward,
   .play,
   .backward{
-    color: #6B4080;
+    color: #AD00FF;
   }
 
   .shadow{
