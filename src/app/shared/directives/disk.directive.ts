@@ -1,21 +1,28 @@
-import { Directive, Renderer2, ElementRef } from '@angular/core';
-import { interval, Observable } from 'rxjs';
+import { Directive, Renderer2, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { interval, Observable, Subscription } from 'rxjs';
 import { PlayerService } from '../services/player.service';
 
 @Directive({
   selector: '[onRoutadeDisk]'
 })
-export class DiskDirective {
+export class DiskDirective implements OnInit, OnDestroy {
 
   private deg: number = 0;
   private $interval: Observable<number>;
+  private $intervalSub: Subscription;
 
   constructor(
     private el: ElementRef,
     private r: Renderer2,
     private playerS: PlayerService
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     this.animationRotateDelay(2000);
+  }
+
+  ngOnDestroy(): void {
+    this.$intervalSub.unsubscribe();
   }
 
   rotate(): void {
@@ -28,7 +35,7 @@ export class DiskDirective {
 
     this.$interval = interval(setInterval);
 
-    this.$interval.subscribe(res => {
+    this.$intervalSub = this.$interval.subscribe(res => {
       if (this.playerS.play) {
         this.rotate();
       }
