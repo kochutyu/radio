@@ -38,7 +38,7 @@ export const animations = [
     trigger('info', [
         state('stop', style({
             left: '50%',
-            top: '60%'
+            top: '78%'
         })),
         state('animate', style({
             left: '165px',
