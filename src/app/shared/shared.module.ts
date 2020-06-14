@@ -24,6 +24,7 @@ import { GenrePipe } from './pipe/genre.pipe';
 // TODO: SERVICES
 import { PlayerService } from './services/player.service';
 import { RadioService } from './services/radio.service';
+import { DiskDirective } from './directives/disk.directive';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { RadioService } from './services/radio.service';
     LoaderComponent,
     DarkMixerComponent,
     LightMixerComponent,
+    DiskDirective,
   ],
   imports: [
     CommonModule,
@@ -63,7 +65,8 @@ import { RadioService } from './services/radio.service';
     LoaderComponent,
     DarkMixerComponent,
     LightMixerComponent,
-    ToastrModule
+    ToastrModule,
+    DiskDirective
   ],
   providers: [
     PlayerService,
