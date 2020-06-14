@@ -64,7 +64,7 @@ export const animations = [
         state('stop', style({
             transform: 'scale(1) translate(-50%, 0)',
             left: '50%',
-            bottom: '100px',
+            bottom: '10%',
         })),
         state('animate', style({
             transform: 'scale(0.5) translate(-50%, 0)',
