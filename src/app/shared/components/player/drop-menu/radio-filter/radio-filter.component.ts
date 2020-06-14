@@ -11,14 +11,14 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
   styleUrls: ['./radio-filter.component.scss']
 })
 export class RadioFilterComponent implements OnInit {
-  
+
   @Input() radios: any = [];
   @Input() lightTheme: boolean;
 
   @ViewChild('genreOptionAll') genreOptionAll: ElementRef;
 
   $country: Subscription
-  
+
   form: FormGroup;
 
   constructor(
@@ -29,33 +29,49 @@ export class RadioFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      country: new FormControl(this.playerS.settings.defaultCountry),
-      genre: new FormControl(this.playerS.settings.defaultGenre)
+      country: new FormControl(this.onChangeCountry()),
+      genre: new FormControl(this.onChangeGenre())
     });
-    console.log(this.form.value);
+
     this.playerS.filterPlayerForm = this.form;
   }
 
-  onChange(): void {
+  onCountry(): void {
     this.loadS.dropMenu = true;
     this.playerS.radios = [];
-    this.$country = this.radioS.getRadioSearch(this.form.value.country, this.form.value.genre, '').subscribe(res => {
+    this.$country = this.radioS.getRadioSearch(this.form.value.country, this.playerS.settings.defaultGenre, '').subscribe(res => {
+
       this.playerS.radios = res.results;
+      this.onChangeSaveData();
       this.loadS.dropMenu = false;
       this.$country.unsubscribe();
     }, err => console.log(err));
   }
 
   onGenre(): void {
+    this.onChangeSaveData();
     this.playerS.filterPlayerForm = this.form;
   }
 
-  onDarkTheme(): void{
+  onDarkTheme(): void {
     this.playerS.changeTheme(false);
   }
 
   onLightTheme(): void {
     this.playerS.changeTheme(true);
+  }
+
+  onChangeCountry(): string {
+    return sessionStorage.getItem('selected-country') !== null ? JSON.parse(sessionStorage.getItem('selected-country')) : this.playerS.settings.defaultCountry;
+  }
+
+  onChangeGenre(): string {
+    return sessionStorage.getItem('selected-genre') !== null ? JSON.parse(sessionStorage.getItem('selected-genre')) : this.playerS.settings.defaultGenre;
+  }
+
+  onChangeSaveData(): void {
+    sessionStorage.setItem('selected-country', JSON.stringify(this.form.value.country));
+    sessionStorage.setItem('selected-genre', JSON.stringify(this.form.value.genre));
   }
 
 }

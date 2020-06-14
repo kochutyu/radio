@@ -4,14 +4,14 @@
     'filter': true,
     'light-theme': lightTheme
   }">
-    <tr class="tr-head" [ngStyle]="{'height': '50px'}" >
+    <tr class="tr-head" [ngStyle]="{'height': '50px'}">
       <th>Country</th>
       <th>Genre</th>
       <th>Theme</th>
     </tr>
     <tr class="tr">
       <td>
-        <select name="select" class="select" (change)="onChange()" formControlName="country">
+        <select name="select" class="select" (change)="onCountry()" formControlName="country">
           <option *ngFor="let country of playerS.country" [value]="country.country_2_letterCode">
             {{country.name}}
           </option>
