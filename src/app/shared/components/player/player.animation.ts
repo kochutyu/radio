@@ -38,11 +38,13 @@ export const animations = [
     trigger('info', [
         state('stop', style({
             left: '50%',
-            top: '78%'
+            top: '78%',
+            textAlign: 'center'
         })),
         state('animate', style({
             left: '165px',
-            top: '65px'
+            top: '70px',
+            textAlign: 'left'
         })),
         transition('* <=> *', [
             group([
