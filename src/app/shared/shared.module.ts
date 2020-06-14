@@ -25,6 +25,7 @@ import { GenrePipe } from './pipe/genre.pipe';
 import { PlayerService } from './services/player.service';
 import { RadioService } from './services/radio.service';
 import { DiskDirective } from './directives/disk.directive';
+import { PlayerBackgroundDirective } from './directives/player-background.directive';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DiskDirective } from './directives/disk.directive';
     DarkMixerComponent,
     LightMixerComponent,
     DiskDirective,
+    PlayerBackgroundDirective,
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,8 @@ import { DiskDirective } from './directives/disk.directive';
     DarkMixerComponent,
     LightMixerComponent,
     ToastrModule,
-    DiskDirective
+    DiskDirective,
+    PlayerBackgroundDirective
   ],
   providers: [
     PlayerService,

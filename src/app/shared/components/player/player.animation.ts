@@ -3,12 +3,6 @@ import { trigger, state, style, transition, group, query, animateChild, animate 
 export const animations = [
 
     trigger('menu-ul', [
-        state('stop', style({
-            backgroundColor: '#111',
-        })),
-        state('animate', style({
-            backgroundColor: '#fff',
-        })),
         transition('* <=> *', [
             group([
                 query('@disk', animateChild()),
