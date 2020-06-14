@@ -14,9 +14,6 @@
 
   <div class="info" [@info]="playerS.animatePlayerGetListRadio" [ngStyle]="{'text-align': 'center'}">
     <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">{{playerS.radio.radioName}}</h4>
-    <div class="error-message" *ngIf="playerS.error">
-      <h4 [ngStyle]="{'color': '#ff564c','text-align': 'center', 'margin': '0px'}">{{playerS.$error}}</h4>
-    </div>
   </div>
 
   <div class="mixer-theme">

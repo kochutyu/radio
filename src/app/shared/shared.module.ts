@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 // TODO: COMPONENTS
 import { PlayerControlComponent } from './components/player/player-control/player-control.component';
@@ -35,7 +36,7 @@ import { RadioService } from './services/radio.service';
     GenrePipe,
     LoaderComponent,
     DarkMixerComponent,
-    LightMixerComponent
+    LightMixerComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +44,8 @@ import { RadioService } from './services/radio.service';
     HttpClientModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   exports: [
     FormsModule,
@@ -60,7 +62,8 @@ import { RadioService } from './services/radio.service';
     GenrePipe,
     LoaderComponent,
     DarkMixerComponent,
-    LightMixerComponent
+    LightMixerComponent,
+    ToastrModule
   ],
   providers: [
     PlayerService,

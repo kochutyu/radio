@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { PlayerRadioSearch, Settings } from '../shares.model';
 import { FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 export let THEME = {
   bgColor: '#111'
@@ -15,10 +16,9 @@ export let THEME = {
 })
 export class PlayerService {
 
-  settings:ISettings = new Settings('UA', 'ALL');
+  settings: ISettings = new Settings('UA', 'ALL');
   radio: IPlayerRadioSearch = new PlayerRadioSearch();
 
-  $error: string;
   animatePlayerGetListRadio: string = 'stop';
   bgColor: string = 'dark';
 
@@ -27,23 +27,23 @@ export class PlayerService {
   genre: Array<IPlayerRadioGenre> = [];
 
   play: boolean;
-  error: boolean;
   radioInitStatus: boolean;
   lightTheme: boolean = false;
-  
+
   audio: ElementRef;
   dropMenu: ElementRef;
-  
+
   $radios: Subscription;
   $radioInit: Subscription;
 
   filterPlayerForm: FormGroup;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastr: ToastrService
   ) { }
 
-  changeTheme(lightTheme: boolean): void{
+  changeTheme(lightTheme: boolean): void {
     this.lightTheme = lightTheme;
   }
 
@@ -55,7 +55,6 @@ export class PlayerService {
     this.radio = radio;
     this.radioInit(radio);
     this.play = true;
-    this.error = false;
     this.dropMenu.nativeElement.click();
   }
 
@@ -84,14 +83,12 @@ export class PlayerService {
     this.radio = this.getCurentRadioIndex() > 0 ? this.radios[this.getCurentRadioIndex() - 1] : this.radios[this.radios.length - 1];
     this.radioInit(this.radio);
     this.play = true;
-    this.error = false;
   }
 
   forwardRadio(): void {
     this.radio = this.getCurentRadioIndex() < this.radios.length - 1 ? this.radios[this.getCurentRadioIndex() + 1] : this.radios[0];
     this.radioInit(this.radio);
     this.play = true;
-    this.error = false;
   }
 
   getCurentRadioIndex(): number {
@@ -111,14 +108,12 @@ export class PlayerService {
 
     this.$radioInit = req.subscribe(res => {
     }, err => {
-      
       this.$radioInit.unsubscribe();
     });
   }
-  
+
   handleError(error: HttpErrorResponse): Observable<never> {
-    this.$error = 'Oops, something was wrong.';
-    this.error = true;
+    this.toastr.error('There was a problem requesting the server where the radio is located.', 'Oops, something was wrong!');
     return throwError(error)
   }
 
