@@ -1,11 +1,11 @@
-#Radio
+## RADIOS
 
 ## API for radio
 https://numl.org/xkH
 
 ## Hot keys
-+ ul Escape - open menu
-+ ul Space - play radio
-+ ul Arrow Left - backward radio
-+ ul Arrow Right - forward radio
++ Escape - open menu
++ Space - play radio
++ Arrow Left - backward radio
++ Arrow Right - forward radio
 
