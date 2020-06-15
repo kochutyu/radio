@@ -29,8 +29,8 @@ export class RadioFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      country: new FormControl(this.onChangeCountry()),
-      genre: new FormControl(this.onChangeGenre())
+      country: new FormControl(this.playerS.onChangeCountry()),
+      genre: new FormControl(this.playerS.settings.defaultGenre)
     });
 
     this.playerS.filterPlayerForm = this.form;
@@ -42,6 +42,7 @@ export class RadioFilterComponent implements OnInit {
     this.$country = this.radioS.getRadioSearch(this.form.value.country, this.playerS.settings.defaultGenre, '').subscribe(res => {
 
       this.playerS.radios = res.results;
+      this.playerS.radio = this.playerS.radios[0];
       this.onChangeSaveData();
       this.loadS.dropMenu = false;
       this.$country.unsubscribe();
@@ -61,17 +62,8 @@ export class RadioFilterComponent implements OnInit {
     this.playerS.changeTheme(true);
   }
 
-  onChangeCountry(): string {
-    return sessionStorage.getItem('selected-country') !== null ? JSON.parse(sessionStorage.getItem('selected-country')) : this.playerS.settings.defaultCountry;
-  }
-
-  onChangeGenre(): string {
-    return sessionStorage.getItem('selected-genre') !== null ? JSON.parse(sessionStorage.getItem('selected-genre')) : this.playerS.settings.defaultGenre;
-  }
-
   onChangeSaveData(): void {
     sessionStorage.setItem('selected-country', JSON.stringify(this.form.value.country));
-    sessionStorage.setItem('selected-genre', JSON.stringify(this.form.value.genre));
   }
 
 }

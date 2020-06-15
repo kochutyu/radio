@@ -28,6 +28,7 @@ export class PlayerService {
   genre: Array<IPlayerRadioGenre> = [];
 
   play: boolean;
+  firstPlay: boolean;
   radioInitStatus: boolean;
   lightTheme: boolean = false;
 
@@ -70,12 +71,11 @@ export class PlayerService {
   }
 
   playOrStop(play: boolean = false): void {
-    if (this.radio) {
-      this.playOrStopControl(play);
-    } else {
-      this.radio = this.radios[0];
-      this.playOrStopControl(play);
+    if (!this.firstPlay) {
+      this.radioInit(this.radio);
+      this.firstPlay = true;
     }
+    this.playOrStopControl(play);
   }
 
   backwardRadio(): void {
@@ -109,8 +109,6 @@ export class PlayerService {
     }, err => {
       this.$radioInit.unsubscribe();
     });
-
-
   }
 
   handleError(error: HttpErrorResponse): Observable<never> {
@@ -137,6 +135,10 @@ export class PlayerService {
         this.radios = this.radios.filter(radio => radio.streamURL !== radioURL);
       }
     }
+  }
+
+  onChangeCountry(): string {
+    return sessionStorage.getItem('selected-country') !== null ? JSON.parse(sessionStorage.getItem('selected-country')) : this.settings.defaultCountry;
   }
 
 }

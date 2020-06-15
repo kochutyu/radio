@@ -55,7 +55,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   getRadios(): void {
     this.loadS.player = true;
     this.$radios = forkJoin([
-      this.radioS.getRadioSearch('ALL'),
+      this.radioS.getRadioSearch(this.playerS.onChangeCountry()),
       this.radioS.getCountriesList(),
       this.radioS.getMusicGenresList(),
     ]).subscribe(res => {
@@ -63,16 +63,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
       this.playerS.radios = res[0].results;
       this.playerS.country = res[1].results;
       this.playerS.genre = res[2].results;
-
-      if (sessionStorage.getItem('selected-genre')) {
-        sessionStorage.removeItem('selected-genre');
-      }
-
-      if (sessionStorage.getItem('selected-country')) {
-        sessionStorage.removeItem('selected-country');
-      }
-
-      this.playerS.radios = this.playerS.radios.filter(radio => radio.country_2_letterCode === this.playerS.settings.defaultCountry);
+      this.playerS.radio = this.playerS.radios[0];
       this.loadS.player = false;
       this.$radios.unsubscribe();
     });
