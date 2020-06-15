@@ -68,8 +68,6 @@ export class RadioFilterComponent implements OnInit {
 
   searchRadio(value: string): void {
     this.playerS.searchRadio = value;
-    console.log(this.playerS.searchRadio);
-
   }
 
 }
