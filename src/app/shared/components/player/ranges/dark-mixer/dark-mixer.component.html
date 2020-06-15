@@ -1,1 +1,5 @@
-<input type="range" [name]="name" [id]="id" [value]="value" (input)="newValue($event.target.value)" min="0" max="100" step="1">
+<div class="light-mixer-content">
+  <fa-icon class="volume_icon" [icon]="faVolumeUp"></fa-icon>
+  <input type="range" [name]="name" [id]="id" [value]="value" (input)="newValue($event.target.value)" min="0" max="100"
+    step="1">
+</div>

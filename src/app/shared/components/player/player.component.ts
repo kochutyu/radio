@@ -4,6 +4,7 @@ import { PlayerService } from '../../services/player.service';
 import { RadioService } from '../../services/radio.service';
 import { Subscription, forkJoin } from 'rxjs';
 import { LoaderService } from '../../services/loader.service';
+import { faVolumeUp, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
@@ -11,6 +12,8 @@ import { LoaderService } from '../../services/loader.service';
   animations: animations
 })
 export class PlayerComponent implements OnInit, OnDestroy {
+
+  faVolumeUp: IconDefinition = faVolumeUp;
 
   radios: any = [];
 

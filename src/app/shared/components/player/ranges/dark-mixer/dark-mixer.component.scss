@@ -9,7 +9,7 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   margin-top: -11px;
   box-shadow: 1px 1px 1px #ff564c,
-  0px 0px 1px #0d0d0d;
+    0px 0px 1px #0d0d0d;
 }
 
 input[type=range]::-moz-range-thumb {
@@ -24,7 +24,7 @@ input[type=range]::-moz-range-thumb {
 
 input[type=range]::-ms-thumb {
   box-shadow: 1px 1px 1px #ff564c,
-  0px 0px 1px #ff564c;
+    0px 0px 1px #ff564c;
   border: 1px solid #ff564c;
   height: 25px;
   width: 10px;
@@ -39,7 +39,7 @@ input[type=range]::-webkit-slider-runnable-track {
   height: 5px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #fff,
-  0px 0px 1px #fff;
+    0px 0px 1px #fff;
   background: #fff;
   border-radius: 1.3px;
   border: 0.2px solid #fff;
@@ -54,7 +54,7 @@ input[type=range]::-moz-range-track {
   height: 8.4px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #fff,
-  0px 0px 1px #fff;
+    0px 0px 1px #fff;
   background: #fff;
   border-radius: 1.3px;
   border: 0.2px solid #fff;
@@ -75,7 +75,7 @@ input[type=range]::-ms-fill-lower {
   border: 0.2px solid #fff;
   border-radius: 2.6px;
   box-shadow: 1px 1px 1px #fff,
-  0px 0px 1px #fff;
+    0px 0px 1px #fff;
 }
 
 input[type=range]:focus::-ms-fill-lower {
@@ -87,9 +87,21 @@ input[type=range]::-ms-fill-upper {
   border: 0.2px solid #fff;
   border-radius: 2.6px;
   box-shadow: 1px 1px 1px #fff,
-  0px 0px 1px #fff;
+    0px 0px 1px #fff;
 }
 
 input[type=range]:focus::-ms-fill-upper {
   background: #fff;
+}
+
+.volume_icon {
+  color: #fff !important;
+  font-size: 20px;
+}
+
+.light-mixer-content {
+  display: flex;
+  align-items: center;
+  width: 180px;
+  justify-content: space-between;
 }

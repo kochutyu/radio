@@ -95,3 +95,15 @@ input[type=range]::-ms-fill-upper {
 input[type=range]:focus::-ms-fill-upper {
   background: #BF605B;
 }
+
+.volume_icon {
+  color: #BF605B !important;
+  font-size: 20px;
+}
+
+.light-mixer-content {
+  display: flex;
+  align-items: center;
+  width: 180px;
+  justify-content: space-between;
+}
