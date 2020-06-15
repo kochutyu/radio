@@ -30,7 +30,7 @@ export class PlayerService {
   play: boolean;
   firstPlay: boolean;
   radioInitStatus: boolean;
-  lightTheme: boolean = false;
+  lightTheme: boolean;
 
   audio: ElementRef;
   dropMenu: ElementRef;
@@ -54,66 +54,73 @@ export class PlayerService {
   }
 
   selectRadio(radio: IPlayerRadioSearch): void {
-    this.radio = radio;
-    this.radioInit(radio);
-    this.play = true;
+    this.initSelectedRadio(radio);
     this.dropMenu.nativeElement.click();
   }
 
-  playOrStopControl(play: boolean): void {
-    this.play = this.play === true ? false : true;
+  playOrStopControl(): void {
+    this.play = !this.play;
 
-    if (this.play) {
-      this.audio.nativeElement.play();
-    } else {
-      this.audio.nativeElement.pause();
-    }
-
+    this.play
+      ? this.audio.nativeElement.play()
+      : this.audio.nativeElement.pause();
   }
 
-  playOrStop(play: boolean = false): void {
+  playOrStop(): void {
 
     if (this.radios.length === 0) {
 
       if (this.radio.radioID !== '') {
-        this.playOrStopControl(play);
+        this.playOrStopControl();
       } else if (this.radio.radioID === '' && !this.play) {
-        this.toastr.info('Please choose another country', 'Radios list is empty.');
+        this.messageEmptyRadioList();
       }
 
     } else if (!this.firstPlay) {
-      this.radio = this.radios[0];
-      this.radioInit(this.radio);
       this.firstPlay = true;
-      this.playOrStopControl(play);
+      this.initSelectedRadio(this.radios[0], false);
+      this.playOrStopControl();
     } else {
-      this.playOrStopControl(play);
+      this.playOrStopControl();
     }
 
+  }
+
+  initSelectedRadio(radio: IPlayerRadioSearch, play: boolean = true): void {
+    this.radio = radio;
+    this.radioInit(radio);
+
+    if (play) {
+      this.play = true;
+    }
+  }
+
+  checkedLeftArrow(): IPlayerRadioSearch {
+    return this.getCurentRadioIndex() > 0 ?
+      this.radios[this.getCurentRadioIndex() - 1]
+      : this.radios[this.radios.length - 1];
+  }
+
+  checkedRightArrow(): IPlayerRadioSearch {
+    return this.getCurentRadioIndex() < this.radios.length - 1
+      ? this.radios[this.getCurentRadioIndex() + 1]
+      : this.radios[0];
   }
 
   backwardRadio(): void {
-
-    if (this.radios.length > 0) {
-      this.radio = this.getCurentRadioIndex() > 0 ? this.radios[this.getCurentRadioIndex() - 1] : this.radios[this.radios.length - 1];
-      this.radioInit(this.radio);
-      this.play = true;
-    } else {
-      this.toastr.info('Please choose another country', 'Radios list is empty.');
-    }
-
+    this.radios.length > 0
+      ? this.initSelectedRadio(this.checkedLeftArrow())
+      : this.messageEmptyRadioList()
   }
 
   forwardRadio(): void {
+    this.radios.length > 0
+      ? this.initSelectedRadio(this.checkedRightArrow())
+      : this.messageEmptyRadioList()
+  }
 
-    if (this.radios.length > 0) {
-      this.radio = this.getCurentRadioIndex() < this.radios.length - 1 ? this.radios[this.getCurentRadioIndex() + 1] : this.radios[0];
-      this.radioInit(this.radio);
-      this.play = true;
-    } else {
-      this.toastr.info('Please choose another country', 'Radios list is empty.');
-    }
-
+  messageEmptyRadioList(): void {
+    this.toastr.info('Please choose another country!', 'Radios list is empty.');
   }
 
   getCurentRadioIndex(): number {
@@ -131,60 +138,25 @@ export class PlayerService {
       catchError(this.handleError.bind(this))
     )
 
-    this.$radioInit = req.subscribe(res => {
-    }, err => {
-      this.$radioInit.unsubscribe();
-    });
+    this.$radioInit = req.subscribe();
   }
 
   handleError(error: HttpErrorResponse): Observable<never> {
     const { status } = error;
 
-    switch (status) {
-      case 403:
-        this.toastr.error('ERROR 403.', 'Oops 😯, something was wrong!');
-        this, this.radio = new PlayerRadioSearch();
-        this.play = false;
-        break;
-
-      case 404:
-        this.toastr.error('ERROR 404.', 'Oops 😯, something was wrong!');
-        this, this.radio = new PlayerRadioSearch();
-        alert('msg');
-        this.play = false;
-        break;
-
-      default:
-        this.toastr.error('There was a problem requesting the server where the radio is located.', 'Oops 😯, something was wrong!');
-        break;
+    if (status !== 200) {
+      this.toastr.error(`ERROR ${status}`, 'Oops 😯, something was wrong!');
     }
+
+    this.$radioInit.unsubscribe();
 
     return throwError(error)
   }
 
-  saveRadioWichNoExist(url: string): void {
-    if (localStorage.getItem('radio-no-exist')) {
-      const radiosNoExist: Array<string> = JSON.parse(localStorage.getItem('radio-no-exist'));
-      radiosNoExist.push(url)
-      localStorage.setItem('radio-no-exist', JSON.stringify(radiosNoExist));
-    } else {
-      const radiosNoExist = [];
-      radiosNoExist.push(url);
-      localStorage.setItem('radio-no-exist', JSON.stringify(radiosNoExist));
-    }
-  }
-
-  filterRadioFromRadioWichNoExist(): void {
-    if (localStorage.getItem('radio-no-exist')) {
-      const radiosNoExist = JSON.parse(localStorage.getItem('radio-no-exist'));
-      for (const radioURL of radiosNoExist) {
-        this.radios = this.radios.filter(radio => radio.streamURL !== radioURL);
-      }
-    }
-  }
-
   onChangeCountry(): string {
-    return sessionStorage.getItem('selected-country') !== null ? JSON.parse(sessionStorage.getItem('selected-country')) : this.settings.defaultCountry;
+    return sessionStorage.getItem('selected-country')
+      ? JSON.parse(sessionStorage.getItem('selected-country'))
+      : this.settings.defaultCountry;
   }
 
 }

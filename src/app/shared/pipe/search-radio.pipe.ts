@@ -11,7 +11,7 @@ export class SearchRadioPipe implements PipeTransform {
     private playerS: PlayerService
   ) { }
 
-  transform(arr: Array<IPlayerRadioSearch>, search: string = this.playerS.searchRadio): any {
+  transform(arr: Array<IPlayerRadioSearch>, search: string): any {
     if (search.trim() === '') {
       return arr
     }

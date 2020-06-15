@@ -11,7 +11,7 @@ export class GenrePipe implements PipeTransform {
     private playerS: PlayerService
   ) { }
 
-  transform(arr: Array<IPlayerRadioSearch>, genre: string = this.playerS.filterPlayerForm.value.genre): Array<IPlayerRadioSearch> {
+  transform(arr: Array<IPlayerRadioSearch>, genre: string): Array<IPlayerRadioSearch> {
     if (genre === this.playerS.settings.defaultGenre) {
       return arr
     }

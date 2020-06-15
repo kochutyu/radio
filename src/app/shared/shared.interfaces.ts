@@ -33,12 +33,6 @@ export interface IPlayerRadioCountry {
     name: string;
 }
 
-export interface IPlayerRadioHit {
-    artistName: string;
-    songName: string;
-    occurrences: string;
-} 
-
 export interface ISettings {
     defaultCountry: string;
     defaultGenre: string;
