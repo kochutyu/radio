@@ -63,7 +63,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
       this.playerS.radios = res[0].results;
       this.playerS.country = res[1].results;
       this.playerS.genre = res[2].results;
-      this.playerS.radio = this.playerS.radios[0];
       this.loadS.player = false;
       this.$radios.unsubscribe();
     });

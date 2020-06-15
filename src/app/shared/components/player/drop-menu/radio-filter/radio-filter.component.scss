@@ -1,4 +1,5 @@
 #radio-filter {
+
   tr {
     &:hover {
       cursor: auto;
@@ -21,6 +22,16 @@
       margin-right: 5px;
     }
   }
+
+
+  .radio-search {
+
+    input {
+      width: 98% !important;
+      position: relative;
+      left: -3px;
+    }
+  }
 }
 
 
@@ -30,7 +41,8 @@
     flex-direction: column;
     align-items: center;
     margin: 5px 0;
-    button:nth-child(1){
+
+    button:nth-child(1) {
       margin-bottom: 5px;
       margin-right: 0 !important;
     }

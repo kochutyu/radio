@@ -42,7 +42,7 @@ export class RadioFilterComponent implements OnInit {
     this.$country = this.radioS.getRadioSearch(this.form.value.country, this.playerS.settings.defaultGenre, '').subscribe(res => {
 
       this.playerS.radios = res.results;
-      this.playerS.radio = this.playerS.radios[0];
+      this.playerS.firstPlay = true;
       this.onChangeSaveData();
       this.loadS.dropMenu = false;
       this.$country.unsubscribe();
@@ -64,6 +64,12 @@ export class RadioFilterComponent implements OnInit {
 
   onChangeSaveData(): void {
     sessionStorage.setItem('selected-country', JSON.stringify(this.form.value.country));
+  }
+
+  searchRadio(value: string): void {
+    this.playerS.searchRadio = value;
+    console.log(this.playerS.searchRadio);
+
   }
 
 }

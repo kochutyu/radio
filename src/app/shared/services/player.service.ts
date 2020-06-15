@@ -72,6 +72,7 @@ export class PlayerService {
 
   playOrStop(play: boolean = false): void {
     if (!this.firstPlay) {
+      this.radio = this.radios[0];
       this.radioInit(this.radio);
       this.firstPlay = true;
     }

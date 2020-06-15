@@ -30,7 +30,11 @@
         </div>
       </td>
     </tr>
-    <tr>
+    <tr class="tr">
+      <td class="radio-search" colspan="3">
+        <input type="text" name="" id="" [value]="playerS.searchRadio" (input)="searchRadio($event.target.value)"
+          placeholder="search radio station">
+      </td>
     </tr>
   </table>
 </form>
