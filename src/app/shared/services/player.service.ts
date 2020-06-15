@@ -68,27 +68,52 @@ export class PlayerService {
     } else {
       this.audio.nativeElement.pause();
     }
+
   }
 
   playOrStop(play: boolean = false): void {
-    if (!this.firstPlay) {
+
+    if (this.radios.length === 0) {
+
+      if (this.radio.radioID !== '') {
+        this.playOrStopControl(play);
+      } else if (this.radio.radioID === '' && !this.play) {
+        this.toastr.info('Please choose another country', 'Radios list is empty.');
+      }
+
+    } else if (!this.firstPlay) {
       this.radio = this.radios[0];
       this.radioInit(this.radio);
       this.firstPlay = true;
+      this.playOrStopControl(play);
+    } else {
+      this.playOrStopControl(play);
     }
-    this.playOrStopControl(play);
+
   }
 
   backwardRadio(): void {
-    this.radio = this.getCurentRadioIndex() > 0 ? this.radios[this.getCurentRadioIndex() - 1] : this.radios[this.radios.length - 1];
-    this.radioInit(this.radio);
-    this.play = true;
+
+    if (this.radios.length > 0) {
+      this.radio = this.getCurentRadioIndex() > 0 ? this.radios[this.getCurentRadioIndex() - 1] : this.radios[this.radios.length - 1];
+      this.radioInit(this.radio);
+      this.play = true;
+    } else {
+      this.toastr.info('Please choose another country', 'Radios list is empty.');
+    }
+
   }
 
   forwardRadio(): void {
-    this.radio = this.getCurentRadioIndex() < this.radios.length - 1 ? this.radios[this.getCurentRadioIndex() + 1] : this.radios[0];
-    this.radioInit(this.radio);
-    this.play = true;
+
+    if (this.radios.length > 0) {
+      this.radio = this.getCurentRadioIndex() < this.radios.length - 1 ? this.radios[this.getCurentRadioIndex() + 1] : this.radios[0];
+      this.radioInit(this.radio);
+      this.play = true;
+    } else {
+      this.toastr.info('Please choose another country', 'Radios list is empty.');
+    }
+
   }
 
   getCurentRadioIndex(): number {
@@ -113,7 +138,27 @@ export class PlayerService {
   }
 
   handleError(error: HttpErrorResponse): Observable<never> {
-    this.toastr.error('There was a problem requesting the server where the radio is located.', 'Oops, something was wrong!');
+    const { status } = error;
+
+    switch (status) {
+      case 403:
+        this.toastr.error('ERROR 403.', 'Oops 😯, something was wrong!');
+        this, this.radio = new PlayerRadioSearch();
+        this.play = false;
+        break;
+
+      case 404:
+        this.toastr.error('ERROR 404.', 'Oops 😯, something was wrong!');
+        this, this.radio = new PlayerRadioSearch();
+        alert('msg');
+        this.play = false;
+        break;
+
+      default:
+        this.toastr.error('There was a problem requesting the server where the radio is located.', 'Oops 😯, something was wrong!');
+        break;
+    }
+
     return throwError(error)
   }
 
