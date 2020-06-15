@@ -4,8 +4,8 @@
 https://numl.org/xkH
 
 ## COMMITS STYLE
-event essence (object | description of object - is optional)
-CODE - code optimization
++ event essence (object | description of object - is optional)
++ CODE - code optimization
 
 ## Hot keys
 + Escape - open menu
