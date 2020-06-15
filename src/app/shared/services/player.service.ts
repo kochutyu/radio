@@ -16,7 +16,7 @@ export let THEME = {
 })
 export class PlayerService {
 
-  settings: ISettings = new Settings('UA', 'ALL');
+  settings: ISettings = new Settings('ALL', 'ALL');
   radio: IPlayerRadioSearch = new PlayerRadioSearch();
 
   animatePlayerGetListRadio: string = 'stop';

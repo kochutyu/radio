@@ -15,8 +15,6 @@ export class RadioFilterComponent implements OnInit {
   @Input() radios: any = [];
   @Input() lightTheme: boolean;
 
-  @ViewChild('genreOptionAll') genreOptionAll: ElementRef;
-
   $country: Subscription
 
   form: FormGroup;
