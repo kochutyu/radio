@@ -1,13 +1,8 @@
 <div [@drop-menu]="playerS.animatePlayerGetListRadio" [ngClass]="{
   'drop-menu': true,
   'light-theme': lightTheme
-}" #dropList>
-  <div *ngIf="radios.length>0; else load">
-    <app-radio-filter [radios]="radios" [lightTheme]="lightTheme"></app-radio-filter>
-    <app-radio-list [radios]="radios" [lightTheme]="lightTheme"></app-radio-list>
-  </div>
-  <ng-template #load>
-    <app-loader [load]="loadS.dropMenu"></app-loader>
-  </ng-template>
+}" #dropList dropMenu>
+  <app-radio-filter [radios]="radios" [lightTheme]="lightTheme"></app-radio-filter>
+  <app-radio-list [radios]="radios" [lightTheme]="lightTheme"></app-radio-list>
   <div class="shadow"></div>
 </div>

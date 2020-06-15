@@ -20,12 +20,17 @@ import { LightMixerComponent } from './components/player/ranges/light-mixer/ligh
 
 // TODO: PIPES
 import { GenrePipe } from './pipe/genre.pipe';
+import { SearchRadioPipe } from './pipe/search-radio.pipe';
 
 // TODO: SERVICES
 import { PlayerService } from './services/player.service';
 import { RadioService } from './services/radio.service';
+
+// TODO: DIRECTIVES
 import { DiskDirective } from './directives/disk.directive';
 import { PlayerBackgroundDirective } from './directives/player-background.directive';
+import { DropMenuDirective } from './directives/drop-menu.directive';
+import { RadioNameDirective } from './directives/radio-name.directive';
 
 @NgModule({
   declarations: [
@@ -41,6 +46,9 @@ import { PlayerBackgroundDirective } from './directives/player-background.direct
     LightMixerComponent,
     DiskDirective,
     PlayerBackgroundDirective,
+    SearchRadioPipe,
+    DropMenuDirective,
+    RadioNameDirective
   ],
   imports: [
     CommonModule,
@@ -69,7 +77,10 @@ import { PlayerBackgroundDirective } from './directives/player-background.direct
     LightMixerComponent,
     ToastrModule,
     DiskDirective,
-    PlayerBackgroundDirective
+    PlayerBackgroundDirective,
+    SearchRadioPipe,
+    DropMenuDirective,
+    RadioNameDirective
   ],
   providers: [
     PlayerService,

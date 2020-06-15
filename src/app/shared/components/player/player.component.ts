@@ -11,7 +11,7 @@ import { LoaderService } from '../../services/loader.service';
   animations: animations
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-  
+
   radios: any = [];
 
   $radios: Subscription;
@@ -55,13 +55,24 @@ export class PlayerComponent implements OnInit, OnDestroy {
   getRadios(): void {
     this.loadS.player = true;
     this.$radios = forkJoin([
-      this.radioS.getRadioSearch('UA'),
+      this.radioS.getRadioSearch('ALL'),
       this.radioS.getCountriesList(),
       this.radioS.getMusicGenresList(),
     ]).subscribe(res => {
+
       this.playerS.radios = res[0].results;
       this.playerS.country = res[1].results;
       this.playerS.genre = res[2].results;
+
+      if (sessionStorage.getItem('selected-genre')) {
+        sessionStorage.removeItem('selected-genre');
+      }
+
+      if (sessionStorage.getItem('selected-country')) {
+        sessionStorage.removeItem('selected-country');
+      }
+
+      this.playerS.radios = this.playerS.radios.filter(radio => radio.country_2_letterCode === this.playerS.settings.defaultCountry);
       this.loadS.player = false;
       this.$radios.unsubscribe();
     });
@@ -72,8 +83,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.getRadios();
   }
 
-  volume(val: string): void{
-    const volume = +val/100
+  volume(val: string): void {
+    const volume = +val / 100
     this.audio.nativeElement.volume = volume;
   }
 

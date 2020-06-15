@@ -29,8 +29,10 @@ export class RadioService {
       )
       .pipe(
         map((data: any) => {
+          let newData: Array<IPlayerRadioSearch> = this.converObjectForRadio(data, this.convertToIPlayerRadioSearch);
+          newData = newData.filter(radio => radio.streamURL.includes('https'));
           return {
-            results: this.converObjectForRadio(data, this.convertToIPlayerRadioSearch)
+            results: newData
           };
         })
       );
@@ -160,7 +162,7 @@ export class RadioService {
       genreName: item.g,
       streamURL: item.u,
       logoImg: item.l,
-    };
+    }
   }
 
   convertToIPlayerRadioCountry(item: any): IPlayerRadioCountry {

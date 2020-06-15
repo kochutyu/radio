@@ -1,11 +1,11 @@
 import { Directive, ElementRef, Renderer2, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription, interval } from 'rxjs';
+import { interval, Subscription, Observable } from 'rxjs';
 import { PlayerService } from '../services/player.service';
 
 @Directive({
-  selector: '[playerBackground]'
+  selector: '[dropMenu]'
 })
-export class PlayerBackgroundDirective implements OnInit, OnDestroy {
+export class DropMenuDirective implements OnInit, OnDestroy {
 
   private $interval: Observable<number>;
   private $intervalSub: Subscription;
@@ -34,19 +34,19 @@ export class PlayerBackgroundDirective implements OnInit, OnDestroy {
 
       if (lightTheme) {
 
-        if (progress === 'stop') {
-          this.r.setStyle(this.el.nativeElement, 'background-color', '#faf9f9');
-        } else {
-          this.r.setStyle(this.el.nativeElement, 'background-color', '#b2dbbf');
-        }
+        this.r.setStyle(this.el.nativeElement, 'background-color', '#5c677d');
+        // if (progress === 'stop') {
+        // } else {
+        //   this.r.setStyle(this.el.nativeElement, 'background-color', '#b2dbbf');
+        // }
 
       } else {
 
-        if (progress === 'stop') {
-          this.r.setStyle(this.el.nativeElement, 'background-color', '#111');
-        } else {
-          this.r.setStyle(this.el.nativeElement, 'background-color', '#fff');
-        }
+        this.r.setStyle(this.el.nativeElement, 'background-color', '#111');
+        // if (progress === 'stop') {
+        // } else {
+        //   this.r.setStyle(this.el.nativeElement, 'background-color', '#fff');
+        // }
 
       }
 

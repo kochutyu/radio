@@ -21,6 +21,7 @@ export class PlayerService {
 
   animatePlayerGetListRadio: string = 'stop';
   bgColor: string = 'dark';
+  searchRadio: string = '';
 
   radios: Array<IPlayerRadioSearch> = [];
   country: Array<IPlayerRadioCountry> = [];
@@ -63,9 +64,7 @@ export class PlayerService {
 
     if (this.play) {
       this.audio.nativeElement.play();
-      this.radioInit(this.radio);
     } else {
-      this.$radioInit.unsubscribe()
       this.audio.nativeElement.pause();
     }
   }
@@ -110,6 +109,8 @@ export class PlayerService {
     }, err => {
       this.$radioInit.unsubscribe();
     });
+
+
   }
 
   handleError(error: HttpErrorResponse): Observable<never> {

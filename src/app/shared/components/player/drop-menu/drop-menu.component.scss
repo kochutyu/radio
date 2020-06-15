@@ -6,6 +6,7 @@
   z-index: 10;
   min-height: 0px;
   max-height: calc(100% - 150px);
+  overflow: hidden;
   overflow-y: auto;
   padding-bottom: 20px;
 }

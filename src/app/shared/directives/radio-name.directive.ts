@@ -1,11 +1,11 @@
-import { Directive, ElementRef, Renderer2, OnInit, OnDestroy } from '@angular/core';
+import { Directive, OnInit, OnDestroy, ElementRef, Renderer2 } from '@angular/core';
 import { Observable, Subscription, interval } from 'rxjs';
 import { PlayerService } from '../services/player.service';
 
 @Directive({
-  selector: '[playerBackground]'
+  selector: '[radioName]'
 })
-export class PlayerBackgroundDirective implements OnInit, OnDestroy {
+export class RadioNameDirective implements OnInit, OnDestroy {
 
   private $interval: Observable<number>;
   private $intervalSub: Subscription;
@@ -35,17 +35,17 @@ export class PlayerBackgroundDirective implements OnInit, OnDestroy {
       if (lightTheme) {
 
         if (progress === 'stop') {
-          this.r.setStyle(this.el.nativeElement, 'background-color', '#faf9f9');
+          this.r.setStyle(this.el.nativeElement, 'color', '#111');
         } else {
-          this.r.setStyle(this.el.nativeElement, 'background-color', '#b2dbbf');
+          this.r.setStyle(this.el.nativeElement, 'color', '#111');
         }
 
       } else {
 
         if (progress === 'stop') {
-          this.r.setStyle(this.el.nativeElement, 'background-color', '#111');
+          this.r.setStyle(this.el.nativeElement, 'color', '#fff');
         } else {
-          this.r.setStyle(this.el.nativeElement, 'background-color', '#fff');
+          this.r.setStyle(this.el.nativeElement, 'color', '#111');
         }
 
       }

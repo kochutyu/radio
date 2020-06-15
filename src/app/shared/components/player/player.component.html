@@ -13,20 +13,20 @@
   <app-drop-menu [radios]="playerS.radios" [lightTheme]="playerS.lightTheme"></app-drop-menu>
 
   <div class="info" [@info]="playerS.animatePlayerGetListRadio" [ngStyle]="{'text-align': 'center'}">
-    <h4 [@info-title-text]="playerS.animatePlayerGetListRadio">{{playerS.radio.radioName}}</h4>
+    <h4 [@info-title-text]="playerS.animatePlayerGetListRadio" radioName>{{playerS.radio.radioName}}</h4>
   </div>
 
   <div class="mixer-theme">
     <app-light-mixer class="mixer" *ngIf="playerS.lightTheme; else darkTheme" (onValue)="volume($event)"
       [@volume]="playerS.animatePlayerGetListRadio"></app-light-mixer>
     <ng-template #darkTheme>
-      <app-dark-mixer class="mixer" (onValue)="volume($event)"
-        [@volume]="playerS.animatePlayerGetListRadio"></app-dark-mixer>
+      <app-dark-mixer class="mixer" (onValue)="volume($event)" [@volume]="playerS.animatePlayerGetListRadio">
+      </app-dark-mixer>
     </ng-template>
   </div>
 
   <audio [src]="playerS.radio.streamURL" preload="auto" id="audio" autoplay controls #audio></audio>
-<!-- ?TRUE -->
+
   <app-player-control [lightTheme]="playerS.lightTheme"></app-player-control>
 
   <div class="current" [@current]="playerS.animatePlayerGetListRadio">

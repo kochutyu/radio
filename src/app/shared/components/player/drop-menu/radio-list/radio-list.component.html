@@ -1,11 +1,11 @@
-<table id="radio-list" class="table" [ngStyle]="{'width': '100%'}">
+<table id="radio-list" class="table" [ngStyle]="{'width': '100%'}" *ngIf="radios.length>0; else radiosNoExist">
   <tr class="tr-head" [ngStyle]="{'height': '50px'}">
     <th>#</th>
     <th>Radio Statio</th>
     <th>Genre</th>
   </tr>
-  <tr class="tr" *ngFor="let radio of radios | genre:playerS.filterPlayerForm.value.genre; let idx = index"
-    [ngStyle]="{'height': '50px'}" (click)="playerS.selectRadio(radio)">
+  <tr class="tr" *ngFor="let radio of radios | genre | searchRadio; let idx = index" [ngStyle]="{'height': '50px'}"
+    (click)="playerS.selectRadio(radio)">
     <td class="idx">
       {{idx + 1}}
     </td>
@@ -17,3 +17,11 @@
     </td>
   </tr>
 </table>
+<ng-template #radiosNoExist>
+  <p [ngStyle]="{'text-align': 'center', 'margin-top':'10px'}" *ngIf="!loadS.dropMenu">
+    radios are missing
+  </p>
+</ng-template>
+<div class="load" *ngIf="loadS.dropMenu">
+  <app-loader [load]="loadS.dropMenu"></app-loader>
+</div>
