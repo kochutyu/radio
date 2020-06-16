@@ -11,7 +11,7 @@
     </tr>
     <tr class="tr">
       <td>
-        <select name="select" class="select" (change)="onCountry()" formControlName="country">
+        <select name="select" class="select" (change)="onChange()" formControlName="country">
           <option value="ALL">All</option>
           <option *ngFor="let country of playerS.country" [value]="country.country_2_letterCode">
             {{country.name}}
@@ -19,7 +19,7 @@
         </select>
       </td>
       <td>
-        <select name="select" class="select" (change)="onGenre()" formControlName="genre">
+        <select name="select" class="select" (change)="onChange()" formControlName="genre">
           <option value="ALL">All</option>
           <option *ngFor="let genre of playerS.genre" [value]="genre.genreName">{{genre.genreName}}</option>
         </select>

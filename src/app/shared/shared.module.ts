@@ -31,6 +31,7 @@ import { DiskDirective } from './directives/disk.directive';
 import { PlayerBackgroundDirective } from './directives/player-background.directive';
 import { DropMenuDirective } from './directives/drop-menu.directive';
 import { RadioNameDirective } from './directives/radio-name.directive';
+import { CountryPipe } from './pipe/country.pipe';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { RadioNameDirective } from './directives/radio-name.directive';
     PlayerBackgroundDirective,
     SearchRadioPipe,
     DropMenuDirective,
-    RadioNameDirective
+    RadioNameDirective,
+    CountryPipe
   ],
   imports: [
     CommonModule,
@@ -80,7 +82,8 @@ import { RadioNameDirective } from './directives/radio-name.directive';
     PlayerBackgroundDirective,
     SearchRadioPipe,
     DropMenuDirective,
-    RadioNameDirective
+    RadioNameDirective,
+    CountryPipe
   ],
   providers: [
     PlayerService,

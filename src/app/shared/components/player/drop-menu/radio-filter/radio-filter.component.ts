@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PlayerService } from 'src/app/shared/services/player.service';
-import { RadioService } from 'src/app/shared/services/radio.service';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 
@@ -21,7 +20,6 @@ export class RadioFilterComponent implements OnInit, OnDestroy {
 
   constructor(
     public playerS: PlayerService,
-    private radioS: RadioService,
     public loadS: LoaderService
   ) { }
 
@@ -38,19 +36,10 @@ export class RadioFilterComponent implements OnInit, OnDestroy {
     this.$country.unsubscribe();
   }
 
-  onCountry(): void {
-    this.loadS.dropMenu = true;
-    this.playerS.radios = [];
-    this.$country = this.radioS.getRadioSearch(this.form.value.country, this.playerS.settings.defaultGenre, '').subscribe(res => {
-
-      this.playerS.radios = res.results;
-      this.playerS.firstPlay = true;
-      this.loadS.dropMenu = false;
-    }, err => console.log(err));
-  }
-
-  onGenre(): void {
+  onChange(): void {
     this.playerS.filterPlayerForm = this.form;
+    console.log(this.form.value.country);
+
   }
 
   onDarkTheme(): void {
