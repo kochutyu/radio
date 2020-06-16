@@ -40,22 +40,11 @@ export const animations = [
             top: '70px',
             textAlign: 'left'
         })),
-        transition('* <=> *', [
-            group([
-                query('@info-title-text', animateChild()),
-                animate('500ms ease-in'),
-            ]),
-        ])
-    ]),
-    trigger('info-title-text', [
-        state('stop', style({
-            color: '#fff'
-        })),
-        state('animate', style({
-            color: '#111'
-        })),
         transition('* <=> *', animate('500ms ease-in'))
     ]),
+    // trigger('info-title-text', [
+    //     transition('* <=> *', animate('500ms ease-in'))
+    // ]),
     trigger('player-control', [
         state('stop', style({
             transform: 'scale(1) translate(-50%, 0)',

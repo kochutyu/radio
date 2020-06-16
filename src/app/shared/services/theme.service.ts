@@ -1,14 +1,12 @@
-import { Injectable, ViewChildren, ElementRef, QueryList, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, ViewChildren, ElementRef, QueryList, Renderer2, RendererFactory2, HostListener } from '@angular/core';
 import { PlayerService } from './player.service';
-import { Type } from '@angular/compiler/src/core';
-import { flatMap } from 'rxjs/operators';
 
 const colorsForLightTheme = {
 
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
 
@@ -22,6 +20,7 @@ export class ThemeService {
   player: QueryList<ElementRef>;
 
   private _renderer: Renderer2;
+  ChangeBgColor: any;
 
   // *COMPONENT
   private _screen: ElementRef;
@@ -33,15 +32,15 @@ export class ThemeService {
   private _dropMenu: ElementRef;
   //* TABLE
   private _radioFilterTable: ElementRef;
-  private _radioFilterTableTr: Array<ElementRef>;
-  private _radioFilterTableTd: Array<ElementRef>;
+  private _radioFilterTableTr: Array<any>;
+  private _radioFilterTableTd: Array<any>;
 
   //* TABLE
   private _radioListTable: ElementRef;
-  private _radioListTableTr: Array<ElementRef>;
-  private _radioListTableTd: Array<ElementRef>;
+  private _radioListTableTr: Array<any>;
+  private _radioListTableTd: Array<any>;
 
-  private _allElementsRef: Array<ElementRef | Array<ElementRef>> = [];
+  private _allElementsRef: Array<any | Array<any>> = [];
 
   constructor(
     private playerS: PlayerService,
@@ -55,7 +54,7 @@ export class ThemeService {
 
       this._screen = item.nativeElement.children[1];
       this._dropMenu = item.nativeElement.children[1].children[2];
-      this._info = item.nativeElement.children[1].children[3];
+      this._info = item.nativeElement.children[1].children[3].children[0];
       this._playerControl = item.nativeElement.children[1].children[7];
 
       this._radioFilterTable = item.nativeElement.children[1].children[2].children[0].children[0].children[0].children[0];
@@ -87,9 +86,9 @@ export class ThemeService {
     this._allElementsRef = this.flattenDeep(this._allElementsRef);
   }
 
-  setTransitionForAllElementsRef(delay: number = 0.3, cubicBezierFunction: string = 'ease-in'): void {
+  setTransitionForAllElementsRef(delay: number = 0.5, cubicBezierFunction: string = 'ease-in'): void {
     this._allElementsRef.forEach(item => {
-      this._renderer.setStyle(this._background, 'transition', `${delay} ${cubicBezierFunction}`);
+      this._renderer.setStyle(this._background, 'transition', `${delay}s all ${cubicBezierFunction}`);
     })
   }
 
@@ -109,11 +108,15 @@ export class ThemeService {
 
     if (this.playerS.animatePlayerGetListRadio === 'stop') {
       this.initLightTheme();
+      this.initDarkTheme();
 
     } else {
       this.initLightTheme(true);
+      this.initDarkTheme(true);
 
     }
+    localStorage.setItem('theme', JSON.stringify(theme));
+
   }
 
   flattenDeep(arr): Array<any> {
@@ -190,21 +193,75 @@ export class ThemeService {
 
   initLightTheme(animate: boolean = false): void {
 
-    if (animate) {
-    }
+    if (this.registerTheme.light) {
 
-    if (!animate) {
+      if (animate) {
+        this.setStyleForElementRef('#fff', '#111', '15px solid #5c677d', '#FFE7E6', '#4D0028');
+      }
+
+      if (!animate) {
+        this.setStyleForElementRef('#FFE6F3', '#fff', '15px solid #5c677d', '#FFE7E6', '#4D0028');
+      }
+
     }
 
   }
 
   initDarkTheme(animate: boolean = false): void {
 
-    if (animate) {
+    console.log(this.registerTheme);
+
+    if (this.registerTheme.dark) {
+
+      if (animate) {
+        this.setStyleForElementRef('#fff', '#111', '15px solid #111', '#1d1d1d', '#111');
+      }
+
+      if (!animate) {
+        this.setStyleForElementRef('#111', '#fff', '15px solid #111', '#1d1d1d', '#111');
+      }
+
     }
 
-    if (!animate) {
+  }
+
+  setStyleForElementRef(
+    background: string,
+    info: string,
+    tableBorder: string,
+    trBackground: string,
+    tdColor: string
+  ): void {
+    this._renderer.setStyle(this._background, 'background', background);
+    this._renderer.setStyle(this._info, 'color', info);
+
+    //* FILTER
+    this._renderer.setStyle(this._radioFilterTable, 'border', tableBorder);
+
+    this._radioFilterTableTr.forEach((tr, i, arr) => {
+
+      this._renderer.setStyle(tr, 'background', trBackground);
+      arr[i].addEventListener('mouseover', () => {
+        this._renderer.setStyle(tr, 'background', 'red');
+      })
+      arr[i].addEventListener('mouseout', () => {
+        this._renderer.setStyle(tr, 'background', trBackground);
+      })
+    })
+
+    for (const td of this._radioFilterTableTd) {
+      this._renderer.setStyle(td, 'color', tdColor);
     }
+
+    //* RADIO LIST
+    this._renderer.setStyle(this._radioListTable, 'border', tableBorder);
+    for (const tr of this._radioListTableTr) {
+      this._renderer.setStyle(tr, 'background', trBackground);
+    }
+    for (const td of this._radioListTableTd) {
+      this._renderer.setStyle(td, 'color', tdColor);
+    }]
+
 
   }
 
