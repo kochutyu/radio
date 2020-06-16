@@ -1,17 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, HostListener, ViewChildren, QueryList, AfterViewInit, Renderer2 } from '@angular/core';
 import { animations } from './player.animation';
 import { PlayerService } from '../../services/player.service';
 import { RadioService } from '../../services/radio.service';
 import { Subscription, forkJoin } from 'rxjs';
 import { LoaderService } from '../../services/loader.service';
 import { faVolumeUp, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { ThemeService } from '../../services/theme.service';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss'],
   animations: animations
 })
-export class PlayerComponent implements OnInit, OnDestroy {
+export class PlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   faVolumeUp: IconDefinition = faVolumeUp;
 
@@ -20,15 +21,22 @@ export class PlayerComponent implements OnInit, OnDestroy {
   $radios: Subscription;
 
   @ViewChild('audio', { static: true }) audio: ElementRef;
+  @ViewChildren("player", { read: ElementRef }) player: QueryList<ElementRef>
 
   constructor(
     public playerS: PlayerService,
     private radioS: RadioService,
-    public loadS: LoaderService
+    public loadS: LoaderService,
+    public themeS: ThemeService
   ) { }
 
   ngOnInit(): void {
     this.initRadio();
+  }
+
+  ngAfterViewInit(): void {
+    this.themeS.player = this.player;
+    this.themeS.initTheme();
   }
 
   ngOnDestroy(): void {
@@ -51,6 +59,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     if (event.key === 'Escape') {
       this.playerS.dropMenu.nativeElement.click();
+    }
+
+    if (event.key === '2') {
+      this.themeS.initTheme();
     }
 
   }

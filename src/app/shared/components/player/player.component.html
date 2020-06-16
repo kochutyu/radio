@@ -1,36 +1,43 @@
 <app-navbar></app-navbar>
 
-<app-loader [load]="loadS.player"></app-loader>
 
-<article class="screen" playerBackground>
+<div class="player" #player>
+  <app-loader [load]="loadS.player"></app-loader>
 
-  <div class="cover-img" [@disk]="playerS.animatePlayerGetListRadio">
-    <div class="cover-img__relative">
-      <img src="assets/player/disk.png" alt="" onRoutadeDisk>
+  <article class="screen">
+
+    <button class="test" (click)="themeS.initTheme()">TEST</button>
+
+    <div class="cover-img" [@disk]="playerS.animatePlayerGetListRadio">
+      <div class="cover-img__relative">
+        <img src="assets/player/disk.png" alt="" onRoutadeDisk>
+      </div>
     </div>
-  </div>
 
-  <app-drop-menu [radios]="playerS.radios" [lightTheme]="playerS.lightTheme"></app-drop-menu>
+    <app-drop-menu [radios]="playerS.radios" [lightTheme]="playerS.lightTheme"></app-drop-menu>
 
-  <div class="info" [@info]="playerS.animatePlayerGetListRadio" [ngStyle]="{'text-align': 'center'}">
-    <h4 [@info-title-text]="playerS.animatePlayerGetListRadio" radioName>{{playerS.radio.radioName}}</h4>
-  </div>
+    <div class="info" [@info]="playerS.animatePlayerGetListRadio" [ngStyle]="{'text-align': 'center'}">
+      <h4 [@info-title-text]="playerS.animatePlayerGetListRadio" radioName>{{playerS.radio.radioName}}</h4>
+    </div>
 
-  <div class="mixer-theme">
-    <app-light-mixer class="mixer" *ngIf="playerS.lightTheme; else darkTheme" (onValue)="playerS.volume($event)"
-      [@volume]="playerS.animatePlayerGetListRadio"></app-light-mixer>
-    <ng-template #darkTheme>
-      <app-dark-mixer class="mixer" (onValue)="playerS.volume($event)" [@volume]="playerS.animatePlayerGetListRadio">
-      </app-dark-mixer>
-    </ng-template>
-  </div>
+    <div class="mixer-theme">
+      <app-light-mixer class="mixer" *ngIf="playerS.lightTheme; else darkTheme" (onValue)="playerS.volume($event)"
+        [@volume]="playerS.animatePlayerGetListRadio"></app-light-mixer>
+      <ng-template #darkTheme>
+        <app-dark-mixer class="mixer" (onValue)="playerS.volume($event)" [@volume]="playerS.animatePlayerGetListRadio">
+        </app-dark-mixer>
+      </ng-template>
+    </div>
 
-  <audio [src]="playerS.radio.streamURL" preload="auto" id="audio" autoplay controls #audio></audio>
+    <audio [src]="playerS.radio.streamURL" preload="auto" id="audio" autoplay controls #audio></audio>
 
-  <app-player-control [lightTheme]="playerS.lightTheme"></app-player-control>
+    <app-player-control [lightTheme]="playerS.lightTheme"></app-player-control>
 
-  <div class="current" [@current]="playerS.animatePlayerGetListRadio">
-    <h2>Radio By KochuTok</h2>
-  </div>
 
-</article>
+    <div class="current" [@current]="playerS.animatePlayerGetListRadio">
+      <h2>Radio By KochuTok</h2>
+    </div>
+
+    <div class="background"></div>
+  </article>
+</div>

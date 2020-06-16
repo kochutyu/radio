@@ -28,5 +28,5 @@ export class Settings implements ISettings {
     constructor(
         public defaultCountry: string,
         public defaultGenre: string
-    ) {}
+    ) { }
 }

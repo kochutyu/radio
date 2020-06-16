@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/shared/services/loader.service';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
   selector: 'app-radio-filter',
@@ -20,7 +21,8 @@ export class RadioFilterComponent implements OnInit, OnDestroy {
 
   constructor(
     public playerS: PlayerService,
-    public loadS: LoaderService
+    public loadS: LoaderService,
+    public themeS: ThemeService
   ) { }
 
   ngOnInit(): void {
@@ -44,10 +46,12 @@ export class RadioFilterComponent implements OnInit, OnDestroy {
 
   onDarkTheme(): void {
     this.playerS.changeTheme(false);
+    this.themeS.initTheme('dark');
   }
 
   onLightTheme(): void {
     this.playerS.changeTheme(true);
+    this.themeS.initTheme('light');
   }
 
   searchRadio(value: string): void {

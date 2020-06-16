@@ -32,6 +32,7 @@ import { PlayerBackgroundDirective } from './directives/player-background.direct
 import { DropMenuDirective } from './directives/drop-menu.directive';
 import { RadioNameDirective } from './directives/radio-name.directive';
 import { CountryPipe } from './pipe/country.pipe';
+import { ThemeService } from './services/theme.service';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { CountryPipe } from './pipe/country.pipe';
   ],
   providers: [
     PlayerService,
-    RadioService
+    RadioService,
+    ThemeService
   ],
 })
 export class SharedModule { }
