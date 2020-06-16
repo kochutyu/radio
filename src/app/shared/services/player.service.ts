@@ -1,7 +1,8 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { IPlayerRadioSearch, IPlayerRadioCountry, IPlayerRadioGenre, ISettings } from '../shared.interfaces';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 import { PlayerRadioSearch, Settings } from '../shares.model';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -130,24 +131,26 @@ export class PlayerService {
   }
 
   radioInit(radio: IPlayerRadioSearch): void {
+    this.radioInitStatus ? this.$radioInit.unsubscribe() : this.radioInitStatus = true;
     this.radio = radio;
 
-    this.fetch(radio.streamURL)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const req = this.http.get(radio.streamURL).pipe(
+      catchError(this.handleError.bind(this))
+    )
+
+    this.$radioInit = req.subscribe();
   }
 
-  handleError(error: HttpErrorResponse): void {
+  handleError(error: HttpErrorResponse): Observable<never> {
     const { status } = error;
 
     if (status !== 200) {
       this.toastr.error(`ERROR ${status}`, 'Oops 😯, something was wrong!');
     }
 
+    this.$radioInit.unsubscribe();
+
+    return throwError(error)
   }
 
   onChangeCountry(): string {
@@ -167,10 +170,6 @@ export class PlayerService {
   volume(val: string): void {
     const volume = +val / 100
     this.audio.nativeElement.volume = volume;
-  }
-
-  fetch(url): Promise<Response> {
-    return fetch(url)
   }
 
 }
