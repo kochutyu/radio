@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { RadioService } from 'src/app/shared/services/radio.service';
@@ -10,7 +10,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
   templateUrl: './radio-filter.component.html',
   styleUrls: ['./radio-filter.component.scss']
 })
-export class RadioFilterComponent implements OnInit {
+export class RadioFilterComponent implements OnInit, OnDestroy {
 
   @Input() radios: any = [];
   @Input() lightTheme: boolean;
@@ -34,6 +34,10 @@ export class RadioFilterComponent implements OnInit {
     this.playerS.filterPlayerForm = this.form;
   }
 
+  ngOnDestroy(): void {
+    this.$country.unsubscribe();
+  }
+
   onCountry(): void {
     this.loadS.dropMenu = true;
     this.playerS.radios = [];
@@ -41,14 +45,11 @@ export class RadioFilterComponent implements OnInit {
 
       this.playerS.radios = res.results;
       this.playerS.firstPlay = true;
-      this.onChangeSaveData();
       this.loadS.dropMenu = false;
-      this.$country.unsubscribe();
     }, err => console.log(err));
   }
 
   onGenre(): void {
-    this.onChangeSaveData();
     this.playerS.filterPlayerForm = this.form;
   }
 
@@ -58,10 +59,6 @@ export class RadioFilterComponent implements OnInit {
 
   onLightTheme(): void {
     this.playerS.changeTheme(true);
-  }
-
-  onChangeSaveData(): void {
-    sessionStorage.setItem('selected-country', JSON.stringify(this.form.value.country));
   }
 
   searchRadio(value: string): void {

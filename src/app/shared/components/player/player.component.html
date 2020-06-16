@@ -17,10 +17,10 @@
   </div>
 
   <div class="mixer-theme">
-    <app-light-mixer class="mixer" *ngIf="playerS.lightTheme; else darkTheme" (onValue)="volume($event)"
+    <app-light-mixer class="mixer" *ngIf="playerS.lightTheme; else darkTheme" (onValue)="playerS.volume($event)"
       [@volume]="playerS.animatePlayerGetListRadio"></app-light-mixer>
     <ng-template #darkTheme>
-      <app-dark-mixer class="mixer" (onValue)="volume($event)" [@volume]="playerS.animatePlayerGetListRadio">
+      <app-dark-mixer class="mixer" (onValue)="playerS.volume($event)" [@volume]="playerS.animatePlayerGetListRadio">
       </app-dark-mixer>
     </ng-template>
   </div>

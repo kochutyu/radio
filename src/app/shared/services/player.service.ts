@@ -159,4 +159,17 @@ export class PlayerService {
       : this.settings.defaultCountry;
   }
 
+  getTrueGenre(): void {
+    this.genre = this.genre.filter(genre => this.radios.some(radio => genre.genreName.toLocaleLowerCase() === radio.genreName.toLocaleLowerCase()));
+  }
+
+  getTrueCountry(): void {
+    this.country = this.country.filter(radio => this.radios.some(country => radio.country_2_letterCode.toLocaleLowerCase() === country.country_2_letterCode.toLocaleLowerCase()));
+  }
+
+  volume(val: string): void {
+    const volume = +val / 100
+    this.audio.nativeElement.volume = volume;
+  }
+
 }

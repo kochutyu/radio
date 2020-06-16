@@ -36,9 +36,11 @@ export class DiskDirective implements OnInit, OnDestroy {
     this.$interval = interval(setInterval);
 
     this.$intervalSub = this.$interval.subscribe(res => {
+
       if (this.playerS.play) {
         this.rotate();
       }
+
     })
   }
 
