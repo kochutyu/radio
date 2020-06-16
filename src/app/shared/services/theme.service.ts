@@ -260,7 +260,7 @@ export class ThemeService {
     }
     for (const td of this._radioListTableTd) {
       this._renderer.setStyle(td, 'color', tdColor);
-    }]
+    }
 
 
   }
