@@ -4,7 +4,7 @@ import { PlayerService } from 'src/app/shared/services/player.service';
 import { Subscription, interval } from 'rxjs';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { ThemeService } from 'src/app/shared/services/theme.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { IPlayerRadioSearch } from 'src/app/shared/shared.interfaces';
 
 @Component({
   selector: 'app-radio-filter',
@@ -13,7 +13,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class RadioFilterComponent implements OnInit, OnDestroy {
 
-  @Input() radios: any = [];
+  @Input() radios: Array<IPlayerRadioSearch> = [];
 
   $country: Subscription
   $theme: Subscription;

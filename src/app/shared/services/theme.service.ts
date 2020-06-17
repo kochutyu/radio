@@ -285,26 +285,4 @@ export class ThemeService {
 
   }
 
-  animateListTr(tableBackground, trBackground, trColor, trHoverBackground, trHoverColor): void {
-    //* RADIO LIST
-    this._renderer.setStyle(this._radioListTable, 'border', `15px solid ${tableBackground}`);
-
-    for (const tr of this._radioListTableTr) {
-
-      this._renderer.setStyle(tr, 'background', trBackground);
-      this._renderer.setStyle(tr, 'color', trColor);
-
-      tr.addEventListener('mouseover', () => {
-        this._renderer.setStyle(tr, 'background', trHoverBackground);
-        this._renderer.setStyle(tr, 'color', trHoverColor);
-      })
-
-      tr.addEventListener('mouseout', () => {
-        this._renderer.setStyle(tr, 'background', trBackground);
-        this._renderer.setStyle(tr, 'color', trColor);
-      })
-
-    }
-  }
-
 }

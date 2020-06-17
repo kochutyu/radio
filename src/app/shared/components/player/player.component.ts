@@ -6,6 +6,7 @@ import { Subscription, forkJoin } from 'rxjs';
 import { LoaderService } from '../../services/loader.service';
 import { faVolumeUp, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ThemeService } from '../../services/theme.service';
+import { IPlayerRadioSearch } from '../../shared.interfaces';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
@@ -16,7 +17,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   faVolumeUp: IconDefinition = faVolumeUp;
 
-  radios: any = [];
+  radios: Array<IPlayerRadioSearch> = [];
 
   $radios: Subscription;
 
