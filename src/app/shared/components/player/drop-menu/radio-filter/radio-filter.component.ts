@@ -4,6 +4,7 @@ import { PlayerService } from 'src/app/shared/services/player.service';
 import { Subscription, interval } from 'rxjs';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { ThemeService } from 'src/app/shared/services/theme.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-radio-filter',
@@ -40,11 +41,7 @@ export class RadioFilterComponent implements OnInit, OnDestroy {
 
   onChange(): void {
     this.playerS.filterPlayerForm = this.form;
-
-    this.$theme = interval(1).subscribe(res => {
-      this.themeS.initTheme();
-      this.$theme.unsubscribe();
-    })
+    this.setStyleForRadioList();
   }
 
   onDarkTheme(): void {
@@ -59,6 +56,14 @@ export class RadioFilterComponent implements OnInit, OnDestroy {
 
   searchRadio(value: string): void {
     this.playerS.searchRadio = value;
+    this.setStyleForRadioList();
+  }
+
+  setStyleForRadioList(): void {
+    this.$theme = interval(1).subscribe(res => {
+      this.themeS.initTheme();
+      this.$theme.unsubscribe();
+    })
   }
 
 }
