@@ -39,8 +39,6 @@ export class RadioFilterComponent implements OnInit, OnDestroy {
 
   onChange(): void {
     this.playerS.filterPlayerForm = this.form;
-    console.log(this.form.value.country);
-
   }
 
   onDarkTheme(): void {

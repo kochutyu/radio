@@ -49,7 +49,7 @@ export class ThemeService {
     this._renderer = rendererFactory.createRenderer(null, null);
   }
 
-  getElementRefForItemTag(): void {
+  private getElementRefForItemTag(): void {
     this.player.forEach((item: ElementRef) => {
       this._screen = item.nativeElement.children[1];
       this._dropMenu = item.nativeElement.children[1].children[1];
@@ -71,7 +71,7 @@ export class ThemeService {
     })
   }
 
-  groupAllElementsRef(): void {
+  private groupAllElementsRef(): void {
     this._allElementsRef = [
       this._screen,
       this._dropMenu,
@@ -89,7 +89,7 @@ export class ThemeService {
     this._allElementsRef = this.flattenDeep(this._allElementsRef);
   }
 
-  setTransitionForAllElementsRef(delay: number = 0.5, cubicBezierFunction: string = 'ease-in'): void {
+  private setTransitionForAllElementsRef(delay: number = 0.5, cubicBezierFunction: string = 'ease-in'): void {
     this._allElementsRef.forEach(item => {
       this._renderer.setStyle(this._background, 'transition', `${delay}s all ${cubicBezierFunction}`);
     })
@@ -118,11 +118,11 @@ export class ThemeService {
     localStorage.setItem('theme', JSON.stringify(theme));
   }
 
-  flattenDeep(arr): Array<any> {
+  private flattenDeep(arr): Array<any> {
     return arr.reduce((acc, val, arr) => Array.isArray(val) ? acc.concat(val) : acc.concat(val), []);
   }
 
-  getListOfElementRef(arr: Array<any>, exception?: Array<number>, include?: Array<number>): Array<HTMLElement> {
+  private getListOfElementRef(arr: Array<any>, exception?: Array<number>, include?: Array<number>): Array<HTMLElement> {
     let newArr: Array<HTMLElement> = [];
 
     if (typeof include !== 'undefined' && arr.length > 0) {
@@ -150,7 +150,7 @@ export class ThemeService {
     return arr;
   }
 
-  setTheme(theme: string): boolean {
+  private setTheme(theme: string): boolean {
     this.resetTheme();
 
     if (this.registerTheme.hasOwnProperty(theme)) {
@@ -161,7 +161,7 @@ export class ThemeService {
     return false;
   }
 
-  resetTheme(): void {
+  private resetTheme(): void {
     for (const key in this.registerTheme) {
 
       this.registerTheme.hasOwnProperty(key)
@@ -171,7 +171,7 @@ export class ThemeService {
     }
   }
 
-  parameterProcessing(parameter: any | Array<any>, localStorageKey: string, defaultValue: any | Array<any>): any | Array<any> {
+  private parameterProcessing(parameter: any | Array<any>, localStorageKey: string, defaultValue: any | Array<any>): any | Array<any> {
 
     if (typeof parameter !== 'undefined') {
       return parameter;
@@ -188,7 +188,7 @@ export class ThemeService {
 
   }
 
-  initLightTheme(animate: boolean = false): void {
+  private initLightTheme(animate: boolean = false): void {
 
     if (this.registerTheme.light) {
 
@@ -204,7 +204,7 @@ export class ThemeService {
 
   }
 
-  initDarkTheme(animate: boolean = false): void {
+  private initDarkTheme(animate: boolean = false): void {
 
     if (this.registerTheme.dark) {
 
@@ -220,7 +220,7 @@ export class ThemeService {
 
   }
 
-  setStyleForElementRef(
+  private setStyleForElementRef(
     background: string,
     info: string,
     tableBackground: string,

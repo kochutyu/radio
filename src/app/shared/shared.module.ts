@@ -19,20 +19,18 @@ import { DarkMixerComponent } from './components/player/ranges/dark-mixer/dark-m
 import { LightMixerComponent } from './components/player/ranges/light-mixer/light-mixer.component';
 
 // TODO: PIPES
+import { CountryPipe } from './pipe/country.pipe';
 import { GenrePipe } from './pipe/genre.pipe';
 import { SearchRadioPipe } from './pipe/search-radio.pipe';
 
 // TODO: SERVICES
+import { LoaderService } from './services/loader.service';
 import { PlayerService } from './services/player.service';
 import { RadioService } from './services/radio.service';
+import { ThemeService } from './services/theme.service';
 
 // TODO: DIRECTIVES
 import { DiskDirective } from './directives/disk.directive';
-import { PlayerBackgroundDirective } from './directives/player-background.directive';
-import { DropMenuDirective } from './directives/drop-menu.directive';
-import { RadioNameDirective } from './directives/radio-name.directive';
-import { CountryPipe } from './pipe/country.pipe';
-import { ThemeService } from './services/theme.service';
 
 @NgModule({
   declarations: [
@@ -47,10 +45,7 @@ import { ThemeService } from './services/theme.service';
     DarkMixerComponent,
     LightMixerComponent,
     DiskDirective,
-    PlayerBackgroundDirective,
     SearchRadioPipe,
-    DropMenuDirective,
-    RadioNameDirective,
     CountryPipe
   ],
   imports: [
@@ -80,16 +75,14 @@ import { ThemeService } from './services/theme.service';
     LightMixerComponent,
     ToastrModule,
     DiskDirective,
-    PlayerBackgroundDirective,
     SearchRadioPipe,
-    DropMenuDirective,
-    RadioNameDirective,
     CountryPipe
   ],
   providers: [
     PlayerService,
     RadioService,
-    ThemeService
+    ThemeService,
+    LoaderService
   ],
 })
 export class SharedModule { }

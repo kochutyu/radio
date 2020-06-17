@@ -9,6 +9,7 @@ $light-color-font: #4E916F;
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
 
+// TODO: DEFAULT STYLE
 html,
 body {
   height: 100%;
@@ -134,6 +135,7 @@ audio {
   display: none;
 }
 
+// TODO: SELECT
 .select {
   display: block;
   font-size: 16px;
@@ -183,9 +185,9 @@ audio {
 :root:lang(ar) .select,
 :root:lang(iw) .select {
   background-position: left .7em top 50%, 0 0;
-  // padding: .6em .8em .5em 1.4em;
 }
 
+// TODO: BTN
 button {
   text-decoration: none;
   min-width: 100px;
@@ -247,6 +249,7 @@ button:hover {
   cursor: pointer;
 }
 
+// TODO: TABLE
 .table {
   background-color: #111;
   width: inherit;
@@ -281,6 +284,7 @@ button:hover {
   }
 }
 
+// TODO: VOLUME
 input[type=range] {
   -webkit-appearance: none;
   width: 150px;
@@ -303,59 +307,7 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 
-.light-theme {
-  // background-color: #FFE6F3;
-
-  // .filter {
-  //   tr {
-  //     &:hover {
-  //       background-color: #FFE7E6;
-  //     }
-  //   }
-  // }
-
-  .theme-btn {
-    background-color: #AD00FF;
-  }
-
-  // tr {
-  //   background-color: #FFE7E6;
-
-  //   &:hover {
-  //     background-color: #f8afff;
-  //     color: red;
-  //   }
-  // }
-
-  // table {
-  //   border: 15px solid #5c677d;
-  // }
-
-
-  // th {
-  //   color: #111;
-  //   background-color: #ff6b6c;
-  // }
-
-  // td {
-  //   color: #4D0028;
-  // }
-
-  // // .forward,
-  // // .play,
-  // // .backward {
-  // //   color: #AD00FF;
-  // // }
-
-  // .shadow {
-  //   background-color: #ffffff;
-  // }
-
-  // .cover-img__relative-dinamic-color {
-  //   background-color: red !important;
-  // }
-}
-
+// TODO: INPUT
 input[type=text] {
   width: 100%;
   padding: 12px 20px;
