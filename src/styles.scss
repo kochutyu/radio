@@ -304,56 +304,56 @@ input[type=range]::-ms-track {
 }
 
 .light-theme {
-  background-color: #FFE6F3;
+  // background-color: #FFE6F3;
 
-  .filter {
-    tr {
-      &:hover {
-        background-color: #FFE7E6;
-      }
-    }
-  }
+  // .filter {
+  //   tr {
+  //     &:hover {
+  //       background-color: #FFE7E6;
+  //     }
+  //   }
+  // }
 
   .theme-btn {
     background-color: #AD00FF;
   }
 
-  tr {
-    background-color: #FFE7E6;
+  // tr {
+  //   background-color: #FFE7E6;
 
-    &:hover {
-      background-color: #f8afff;
-      color: red;
-    }
-  }
+  //   &:hover {
+  //     background-color: #f8afff;
+  //     color: red;
+  //   }
+  // }
 
-  table {
-    border: 15px solid #5c677d;
-  }
+  // table {
+  //   border: 15px solid #5c677d;
+  // }
 
 
-  th {
-    color: #111;
-    background-color: #ff6b6c;
-  }
+  // th {
+  //   color: #111;
+  //   background-color: #ff6b6c;
+  // }
 
-  td {
-    color: #4D0028;
-  }
+  // td {
+  //   color: #4D0028;
+  // }
 
-  .forward,
-  .play,
-  .backward {
-    color: #AD00FF;
-  }
+  // // .forward,
+  // // .play,
+  // // .backward {
+  // //   color: #AD00FF;
+  // // }
 
-  .shadow {
-    background-color: #ffffff;
-  }
+  // .shadow {
+  //   background-color: #ffffff;
+  // }
 
-  .cover-img__relative-dinamic-color {
-    background-color: red !important;
-  }
+  // .cover-img__relative-dinamic-color {
+  //   background-color: red !important;
+  // }
 }
 
 input[type=text] {

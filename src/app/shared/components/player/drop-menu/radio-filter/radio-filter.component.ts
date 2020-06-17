@@ -13,7 +13,6 @@ import { ThemeService } from 'src/app/shared/services/theme.service';
 export class RadioFilterComponent implements OnInit, OnDestroy {
 
   @Input() radios: any = [];
-  @Input() lightTheme: boolean;
 
   $country: Subscription
 

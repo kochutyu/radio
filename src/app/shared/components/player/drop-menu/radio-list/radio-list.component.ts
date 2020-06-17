@@ -8,15 +8,14 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
   styleUrls: ['./radio-list.component.scss']
 })
 export class RadioListComponent implements OnInit {
-  
+
   @Input() radios: any = [];
-  @Input() lightTheme: boolean;
 
   constructor(
     public playerS: PlayerService,
     public loadS: LoaderService
   ) { }
-  
+
   ngOnInit(): void {
   }
 

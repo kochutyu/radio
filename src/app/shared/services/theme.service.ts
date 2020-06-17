@@ -15,32 +15,32 @@ export class ThemeService {
     dark: false
   }
 
-  selectedTheme: Array<boolean> = []
-
   player: QueryList<ElementRef>;
 
   private _renderer: Renderer2;
-  ChangeBgColor: any;
 
-  // *COMPONENT
-  private _screen: ElementRef;
-  private _info: ElementRef;
-  private _background: ElementRef;
-  private _playerControl: ElementRef;
+  //* COMPONENT PLAYER
+  private _screen: HTMLElement;
+  private _info: HTMLElement;
+  private _background: HTMLElement;
+  private _playerControl: Array<HTMLElement>;
 
-  // *COMPONENT
-  private _dropMenu: ElementRef;
-  //* TABLE
-  private _radioFilterTable: ElementRef;
-  private _radioFilterTableTr: Array<any>;
-  private _radioFilterTableTd: Array<any>;
+  //* COMPONENT DROP-MENU
+  private _dropMenu: HTMLElement;
 
-  //* TABLE
-  private _radioListTable: ElementRef;
-  private _radioListTableTr: Array<any>;
-  private _radioListTableTd: Array<any>;
+  //* TABLE IN DROP-MENU
+  private _radioFilterTable: HTMLElement;
+  private _radioFilterTableTr: Array<HTMLElement>;
+  private _radioFilterTableTd: Array<HTMLElement>;
+  private _filterBtn: Array<HTMLElement>;
 
-  private _allElementsRef: Array<any | Array<any>> = [];
+  //* TABLE IN DROP-MENU
+  private _radioListTable: HTMLElement;
+  private _radioListTableTr: Array<HTMLElement>;
+  private _radioListTableTd: Array<HTMLElement>;
+
+  //* ALL ELEMENTS
+  private _allElementsRef: Array<HTMLElement | Array<HTMLElement>> = [];
 
   constructor(
     private playerS: PlayerService,
@@ -51,21 +51,22 @@ export class ThemeService {
 
   getElementRefForItemTag(): void {
     this.player.forEach((item: ElementRef) => {
-
       this._screen = item.nativeElement.children[1];
-      this._dropMenu = item.nativeElement.children[1].children[2];
-      this._info = item.nativeElement.children[1].children[3].children[0];
-      this._playerControl = item.nativeElement.children[1].children[7];
+      this._dropMenu = item.nativeElement.children[1].children[1];
+      this._info = item.nativeElement.children[1].children[2].children[0];
+      this._playerControl = item.nativeElement.children[1].children[5].children[0].children;
+      this._background = item.nativeElement.children[1].children[7];
 
-      this._radioFilterTable = item.nativeElement.children[1].children[2].children[0].children[0].children[0].children[0];
-      this._radioFilterTableTr = this.getListOfElementRef(item.nativeElement.children[1].children[2].children[0].children[0].children[0].children[0].children, [0]);
-      this._radioFilterTableTd = this.getListOfElementRef(item.nativeElement.children[1].children[2].children[0].children[0].children[0].children[0].children, [], [0]);
+      //* RADIO FILTER
+      this._radioFilterTable = item.nativeElement.children[1].children[1].children[0].children[0].children[0].children[0];
+      this._radioFilterTableTr = this.getListOfElementRef(item.nativeElement.children[1].children[1].children[0].children[0].children[0].children[0].children, [0]);
+      this._radioFilterTableTd = this.getListOfElementRef(item.nativeElement.children[1].children[1].children[0].children[0].children[0].children[0].children, [], [0]);
+      this._filterBtn = this.getListOfElementRef(item.nativeElement.children[1].children[1].children[0].children[0].children[0].children[0].children[1].children[2].children[0].children);
 
-      this._radioListTable = item.nativeElement.children[1].children[2].children[0].children[1].children[0];
-      this._radioListTableTr = this.getListOfElementRef(item.nativeElement.children[1].children[2].children[0].children[1].children[0].children, [0]);
-      this._radioListTableTd = this.getListOfElementRef(item.nativeElement.children[1].children[2].children[0].children[1].children[0].children, [], [0]);
-
-      this._background = item.nativeElement.children[1].children[8];
+      //* RADIO LIST
+      this._radioListTable = item.nativeElement.children[1].children[1].children[0].children[1].children[0];
+      this._radioListTableTr = this.getListOfElementRef(item.nativeElement.children[1].children[1].children[0].children[1].children[0].children, [0]);
+      this._radioListTableTd = this.getListOfElementRef(item.nativeElement.children[1].children[1].children[0].children[1].children[0].children, [], [0]);
     })
   }
 
@@ -78,6 +79,7 @@ export class ThemeService {
       this._radioFilterTable,
       this._radioFilterTableTr,
       this._radioFilterTableTd,
+      this._filterBtn,
       this._radioListTable,
       this._radioListTableTr,
       this._radioListTableTd,
@@ -116,15 +118,14 @@ export class ThemeService {
 
     }
     localStorage.setItem('theme', JSON.stringify(theme));
-
   }
 
   flattenDeep(arr): Array<any> {
     return arr.reduce((acc, val, arr) => Array.isArray(val) ? acc.concat(val) : acc.concat(val), []);
   }
 
-  getListOfElementRef(arr: Array<ElementRef>, exception?: Array<number>, include?: Array<number>): Array<ElementRef> {
-    let newArr: Array<ElementRef> = [];
+  getListOfElementRef(arr: Array<any>, exception?: Array<number>, include?: Array<number>): Array<HTMLElement> {
+    let newArr: Array<HTMLElement> = [];
 
     if (typeof include !== 'undefined' && arr.length > 0) {
       for (let i = 0; i < arr.length; i++) {
@@ -158,8 +159,6 @@ export class ThemeService {
       this.registerTheme[theme] = true;
       return true;
     }
-
-
 
     return false;
   }
@@ -196,11 +195,11 @@ export class ThemeService {
     if (this.registerTheme.light) {
 
       if (animate) {
-        this.setStyleForElementRef('#fff', '#111', '15px solid #5c677d', '#FFE7E6', '#4D0028');
+        this.setStyleForElementRef('#fff', '#111', '15px solid #5c677d', '#FFE7E6', '#1d1d1d', '#edd895', '#222', '#4D0028', '#00efff');
       }
 
       if (!animate) {
-        this.setStyleForElementRef('#FFE6F3', '#fff', '15px solid #5c677d', '#FFE7E6', '#4D0028');
+        this.setStyleForElementRef('#FFE6F3', '#56677d', '15px solid #5c677d', '#FFE7E6', '#1d1d1d', '#edd895', '#222', '#4D0028', '#56677d');
       }
 
     }
@@ -209,16 +208,14 @@ export class ThemeService {
 
   initDarkTheme(animate: boolean = false): void {
 
-    console.log(this.registerTheme);
-
     if (this.registerTheme.dark) {
 
       if (animate) {
-        this.setStyleForElementRef('#fff', '#111', '15px solid #111', '#1d1d1d', '#111');
+        this.setStyleForElementRef('#fff', '#111', '15px solid #111', '#1d1d1d', '#edd895', '#222', '#ff564c', '#111', '#fff');
       }
 
       if (!animate) {
-        this.setStyleForElementRef('#111', '#fff', '15px solid #111', '#1d1d1d', '#111');
+        this.setStyleForElementRef('#111', '#fff', '15px solid #111', '#1d1d1d', '#edd895', '#222', '#ff564c', '#111', '#fff');
       }
 
     }
@@ -230,38 +227,61 @@ export class ThemeService {
     info: string,
     tableBorder: string,
     trBackground: string,
-    tdColor: string
+    trColor: string,
+    trHoverBackground: string,
+    trHoverColor: string,
+    tdColor: string,
+    tdPlayerControl: string,
+    filterBtnBackground: string = '#5b6277',
+    filterColor: string = '#ffffff',
   ): void {
+
     this._renderer.setStyle(this._background, 'background', background);
     this._renderer.setStyle(this._info, 'color', info);
 
-    //* FILTER
+    for (const td of this._playerControl) {
+      this._renderer.setStyle(td, 'color', tdPlayerControl);
+    }
+
+    //* RADIO FILTER
     this._renderer.setStyle(this._radioFilterTable, 'border', tableBorder);
 
-    this._radioFilterTableTr.forEach((tr, i, arr) => {
-
+    for (const tr of this._radioFilterTableTr) {
       this._renderer.setStyle(tr, 'background', trBackground);
-      arr[i].addEventListener('mouseover', () => {
-        this._renderer.setStyle(tr, 'background', 'red');
-      })
-      arr[i].addEventListener('mouseout', () => {
-        this._renderer.setStyle(tr, 'background', trBackground);
-      })
-    })
+    }
 
     for (const td of this._radioFilterTableTd) {
       this._renderer.setStyle(td, 'color', tdColor);
     }
 
+    for (const filterBtn of this._filterBtn) {
+      this._renderer.setStyle(filterBtn, 'background', filterBtnBackground);
+      this._renderer.setStyle(filterBtn, 'color', filterColor);
+    }
+
     //* RADIO LIST
     this._renderer.setStyle(this._radioListTable, 'border', tableBorder);
+
     for (const tr of this._radioListTableTr) {
+
       this._renderer.setStyle(tr, 'background', trBackground);
+      this._renderer.setStyle(tr, 'color', trColor);
+
+      tr.addEventListener('mouseover', () => {
+        this._renderer.setStyle(tr, 'background', trHoverBackground);
+        this._renderer.setStyle(tr, 'color', trHoverColor);
+      })
+
+      tr.addEventListener('mouseout', () => {
+        this._renderer.setStyle(tr, 'background', trBackground);
+        this._renderer.setStyle(tr, 'color', trColor);
+      })
+
     }
+
     for (const td of this._radioListTableTd) {
       this._renderer.setStyle(td, 'color', tdColor);
     }
-
 
   }
 

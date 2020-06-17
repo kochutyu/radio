@@ -11,8 +11,6 @@ import { PlayerService } from 'src/app/shared/services/player.service';
 })
 export class PlayerControlComponent implements OnInit {
 
-  @Input() lightTheme: boolean;
-
   faPlay: IconDefinition = faPlay;
   faStop: IconDefinition = faStop;
 
