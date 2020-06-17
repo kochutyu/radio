@@ -245,13 +245,12 @@ button:hover:after {
 }
 
 button:hover {
-  background: #ff564c;
+  background: rgb(123, 129, 147) !important;
   cursor: pointer;
 }
 
 // TODO: TABLE
 .table {
-  background-color: #111;
   width: inherit;
   border-collapse: collapse;
   border: 15px solid #111;
@@ -262,7 +261,6 @@ button:hover {
   transform-origin: 0% 50%;
   text-align: center;
   background: #ff564c;
-  color: #111;
   text-indent: 8px;
   border: 5px solid #111;
   line-height: 50px;
@@ -272,15 +270,12 @@ button:hover {
   transform-origin: 0% 50%;
   transition: all 0.5s ease-in;
   text-align: center;
-  background: #1d1d1d;
   text-indent: 8px;
   border: 5px solid #111;
   line-height: 50px;
 
   &:hover {
-    background: #222;
     cursor: pointer;
-    color: #ff564c;
   }
 }
 
