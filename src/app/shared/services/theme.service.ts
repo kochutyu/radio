@@ -53,6 +53,7 @@ export class ThemeService {
     this.player.forEach((item: ElementRef) => {
       this._screen = item.nativeElement.children[1];
       this._dropMenu = item.nativeElement.children[1].children[1];
+
       this._info = item.nativeElement.children[1].children[2].children[0];
       this._playerControl = item.nativeElement.children[1].children[5].children[0].children;
       this._background = item.nativeElement.children[1].children[7];
@@ -102,21 +103,18 @@ export class ThemeService {
     this.getElementRefForItemTag();
     this.groupAllElementsRef();
     this.setTransitionForAllElementsRef();
-    console.log(theme);
 
     this.setTheme(theme);
 
-    // TODO: THEME
-
+    // TODO: ANIMATION FOR THEME
     if (this.playerS.animatePlayerGetListRadio === 'stop') {
       this.initLightTheme();
       this.initDarkTheme();
-
     } else {
       this.initLightTheme(true);
       this.initDarkTheme(true);
-
     }
+
     localStorage.setItem('theme', JSON.stringify(theme));
   }
 
@@ -195,11 +193,11 @@ export class ThemeService {
     if (this.registerTheme.light) {
 
       if (animate) {
-        this.setStyleForElementRef('#fff', '#111', '15px solid #5c677d', '#FFE7E6', '#1d1d1d', '#edd895', '#222', '#4D0028', '#00efff');
+        this.setStyleForElementRef('#fff', '#111', '#5c677d', '#FFE7E6', '#1d1d1d', '#edd895', '#222', '#4D0028', '#00efff');
       }
 
       if (!animate) {
-        this.setStyleForElementRef('#FFE6F3', '#56677d', '15px solid #5c677d', '#FFE7E6', '#1d1d1d', '#edd895', '#222', '#4D0028', '#56677d');
+        this.setStyleForElementRef('#FFE6F3', '#56677d', '#5c677d', '#FFE7E6', '#1d1d1d', '#edd895', '#222', '#4D0028', '#56677d');
       }
 
     }
@@ -211,11 +209,11 @@ export class ThemeService {
     if (this.registerTheme.dark) {
 
       if (animate) {
-        this.setStyleForElementRef('#fff', '#111', '15px solid #111', '#1d1d1d', '#edd895', '#222', '#ff564c', '#111', '#fff');
+        this.setStyleForElementRef('#fff', '#111', '#111', '#1d1d1d', '#edd895', '#222', '#ff564c', '#111', '#fff');
       }
 
       if (!animate) {
-        this.setStyleForElementRef('#111', '#fff', '15px solid #111', '#1d1d1d', '#edd895', '#222', '#ff564c', '#111', '#fff');
+        this.setStyleForElementRef('#111', '#fff', '#111', '#1d1d1d', '#edd895', '#222', '#ff564c', '#111', '#fff');
       }
 
     }
@@ -225,7 +223,7 @@ export class ThemeService {
   setStyleForElementRef(
     background: string,
     info: string,
-    tableBorder: string,
+    tableBackground: string,
     trBackground: string,
     trColor: string,
     trHoverBackground: string,
@@ -237,6 +235,9 @@ export class ThemeService {
   ): void {
 
     this._renderer.setStyle(this._background, 'background', background);
+    console.log(this._dropMenu.children[0]);
+
+    this._renderer.setStyle(this._dropMenu.children[0], 'background', tableBackground)
     this._renderer.setStyle(this._info, 'color', info);
 
     for (const td of this._playerControl) {
@@ -244,7 +245,7 @@ export class ThemeService {
     }
 
     //* RADIO FILTER
-    this._renderer.setStyle(this._radioFilterTable, 'border', tableBorder);
+    this._renderer.setStyle(this._radioFilterTable, 'border', `15px solid ${tableBackground}`);
 
     for (const tr of this._radioFilterTableTr) {
       this._renderer.setStyle(tr, 'background', trBackground);
@@ -260,7 +261,7 @@ export class ThemeService {
     }
 
     //* RADIO LIST
-    this._renderer.setStyle(this._radioListTable, 'border', tableBorder);
+    this._renderer.setStyle(this._radioListTable, 'border', `15px solid ${tableBackground}`);
 
     for (const tr of this._radioListTableTr) {
 
