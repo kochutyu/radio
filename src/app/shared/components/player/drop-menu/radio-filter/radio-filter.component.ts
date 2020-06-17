@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PlayerService } from 'src/app/shared/services/player.service';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 
@@ -15,6 +15,7 @@ export class RadioFilterComponent implements OnInit, OnDestroy {
   @Input() radios: any = [];
 
   $country: Subscription
+  $theme: Subscription;
 
   form: FormGroup;
 
@@ -39,6 +40,11 @@ export class RadioFilterComponent implements OnInit, OnDestroy {
 
   onChange(): void {
     this.playerS.filterPlayerForm = this.form;
+
+    this.$theme = interval(1).subscribe(res => {
+      this.themeS.initTheme();
+      this.$theme.unsubscribe();
+    })
   }
 
   onDarkTheme(): void {

@@ -235,7 +235,6 @@ export class ThemeService {
   ): void {
 
     this._renderer.setStyle(this._background, 'background', background);
-    console.log(this._dropMenu.children[0]);
 
     this._renderer.setStyle(this._dropMenu.children[0], 'background', tableBackground)
     this._renderer.setStyle(this._info, 'color', info);
@@ -284,6 +283,28 @@ export class ThemeService {
       this._renderer.setStyle(td, 'color', tdColor);
     }
 
+  }
+
+  animateListTr(tableBackground, trBackground, trColor, trHoverBackground, trHoverColor): void {
+    //* RADIO LIST
+    this._renderer.setStyle(this._radioListTable, 'border', `15px solid ${tableBackground}`);
+
+    for (const tr of this._radioListTableTr) {
+
+      this._renderer.setStyle(tr, 'background', trBackground);
+      this._renderer.setStyle(tr, 'color', trColor);
+
+      tr.addEventListener('mouseover', () => {
+        this._renderer.setStyle(tr, 'background', trHoverBackground);
+        this._renderer.setStyle(tr, 'color', trHoverColor);
+      })
+
+      tr.addEventListener('mouseout', () => {
+        this._renderer.setStyle(tr, 'background', trBackground);
+        this._renderer.setStyle(tr, 'color', trColor);
+      })
+
+    }
   }
 
 }
